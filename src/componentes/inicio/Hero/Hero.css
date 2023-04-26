@@ -8,7 +8,7 @@
   height: 450px;
   min-height: 450px;
 
-  background: linear-gradient(#0d1b2a, #0d1b2a, #415a77);
+  background: linear-gradient(#0d1b2a, #0d1b2a, #09386e);
 }
 
 .c-hero-info {
@@ -30,7 +30,7 @@
 }
 
 .c-hero-bg-lineas {
-  background-image: url(/src/assets/img/lineasHero.png);
+  /* background-image: url(/src/assets/img/lineasHero.png); */
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -32,17 +32,17 @@ const Plantillas = () => {
   return (
     <div className="c-plantillas-principal">
       <div className='c-plantillas-title'>
-        <Typography sx={{ color: '#43ACD9', fontWeight: '700', fontSize: '15px' }}>PLANTILLAS</Typography>
-        <Typography top='-8px' position='relative' variant='h5' sx={{ fontWeight: '700' }}>Comienza a codificar</Typography>
+        <Typography sx={{ color: '#43ACD9', fontWeight: '700', fontSize: '17px' }}>PLANTILLAS</Typography>
+        <Typography top='-8px' position='relative' variant='h4' sx={{ fontWeight: '700' }}>Comienza a codificar</Typography>
       </div>
 
       <div className='c-plantillas-info'>
         {
           PLANTILLAS.map(({ nombre, descripcion, id }) =>
             <div className='c-plantillas-plantilla' key={id}>
-              <Typography fontSize='13px' fontWeight='700'>{nombre}</Typography>
+              <Typography fontSize='15px' fontWeight='700'>{nombre}</Typography>
               <Divider />
-              <Typography fontSize='12px'>{descripcion}</Typography>
+              <Typography fontSize='14px'>{descripcion}</Typography>
 
               <div className='c-plantillas-btn'>
                 <Button sx={{ backgroundColor: '#43ACD9', fontSize: '12px' }} size='small' variant='contained'>Editor</Button>
