@@ -1,0 +1,37 @@
+:root {
+  --onActionColor: #0d1b2a;
+  --secondaryColor: #1b263b;
+  --backgroundPrimaryColor: #415a77;
+  --backgroundSecondaryColor: #778da9;
+  --secondaryOnActionColor: #e0e1dd;
+}
+
+.c-header {
+  width: 100vw;
+  height: 70px;
+  background-color: var(--secondaryOnActionColor);
+}
+
+.c-h-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+
+.c-h-nav-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 45%;
+  height: 100%;
+}
+.c-h-nav-login {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 45%;
+  height: 100%;
+}

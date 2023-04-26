@@ -1,0 +1,44 @@
+.c-plantillas-principal {
+  width: 100vw;
+  height: 500px;
+  min-height: 500px;
+  background-color: var(--onActionColor);
+}
+
+.c-plantillas-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 25px;
+}
+
+.c-plantillas-info {
+  background-image: url(/src/assets/img/a.png);
+  background-repeat: no-repeat;
+  background-position: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+}
+
+.c-plantillas-plantilla {
+  padding: 10px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: initial;
+  justify-content: center;
+}
+
+.c-plantillas-btn {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+}
+
+.c-plantillas-bg-lineas {
+  width: 100vw;
+  height: 100%;
+}

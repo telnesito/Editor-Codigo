@@ -1,0 +1,18 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  color-scheme: light dark;
+  background-color: #242424;
+
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: scroll;
+}
+
+html {
+  height: 100vh;
+  min-height: 600px;
+}
