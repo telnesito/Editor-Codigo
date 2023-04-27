@@ -8,31 +8,31 @@ const Beneficios = () => {
       {
         title: 'DESARROLLO',
         descripcion: 'Interfaz grafica y experiencia de usuario a la medida del desarrollador para la construccion de codigo',
-        img: '/src/assets/img/Page-1.png',
+        img: '/img/Page-1.png',
         id: generateUniqueId()
       },
       {
         title: 'AUTO-COMPLETADO',
         descripcion: 'Auto-completado en todos nuestros editores para mejorar la eficiencia en el momento de desarrollar algoritmos',
-        img: '/src/assets/img/autocompletado.png',
+        img: '/img/autocompletado.png',
         id: generateUniqueId()
       },
       {
         title: 'CODE FORMATTING',
         descripcion: 'Formateado de codigo para todos los lenguajes en cualquier momento del desarrollo de algoritmos',
-        img: '/src/assets/img/codeformating.png',
+        img: '/img/codeformating.png',
         id: generateUniqueId()
       },
       {
         title: 'NAVEGACION',
         descripcion: 'Encuentra referencias dentro del editor del codigo, paleta de comandos, buscar, seleccionar, copiar y pegar y mas herramientas para navegar facilmente por el codigo',
-        img: '/src/assets/img/navigate.png',
+        img: '/img/navigate.png',
         id: generateUniqueId()
       },
       {
         title: 'MULTI-LENGUAJES',
         descripcion: 'Dentro de CodeSue podras codificar dentro de los diferentes lenguajes soportados como Ruby, Python o JavaScript',
-        img: '/src/assets/img/Page-1.png',
+        img: '/img/Page-1.png',
         id: generateUniqueId()
       },
     ]
