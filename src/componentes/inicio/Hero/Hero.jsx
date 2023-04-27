@@ -3,7 +3,7 @@ import './Hero.css'
 const Hero = () => {
   return (
     <Box component={'div'} id='inicio' className='c-hero-principal'>
-      <Box width={'420px'} height={'370px'} sx={{ backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover', backgroundImage: 'url(src/assets/img/imgHero.png)' }}></Box>
+      <Box width={'420px'} height={'370px'} sx={{ backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover', backgroundImage: 'url(/img/imgHero.png)' }}></Box>
       <div className='c-hero-bg-lineas'>
         <div className='c-hero-info'>
           <Typography variant='h7'>CodeSue editor de codigo</Typography>
