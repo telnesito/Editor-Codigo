@@ -10,9 +10,11 @@ import SourceIcon from '@mui/icons-material/Source';
 import InfoIcon from '@mui/icons-material/Info';
 import GppGoodIcon from '@mui/icons-material/GppGood';
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [state, setState] = useState(false)
+  const navigate = useNavigate()
   // Items para el menu
   const ITEMS_MENU =
     [
@@ -49,14 +51,14 @@ const Header = () => {
     <Box height={'70px'} component={'header'} sx={{ flexGrow: 1, position: 'sticky', top: '0', zIndex: '10' }} className='c-header'>
       {/* nav */}
       <AppBar position='static'>
-        <Toolbar sx={{ backgroundColor: '#e0e1dd', height: '70px' }}>
+        <Toolbar sx={{ backgroundColor: 'white', height: '70px' }}>
           <IconButton onClick={handleOpenMenu} size='large' edge='start' color='black'
           >
             <MenuIcon />
 
           </IconButton>
           <Typography variant='h7' color={'black'} component={'div'} sx={{ flexGrow: 1 }}>CODESUE</Typography>
-          <Button variant='text' sx={{ color: 'black' }}>Log In</Button>
+          <Button onClick={() => navigate('/gestion-de-sesion')} variant='text' sx={{ color: 'black' }}>Log In</Button>
         </Toolbar>
 
       </AppBar>
