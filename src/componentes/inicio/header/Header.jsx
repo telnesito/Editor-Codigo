@@ -62,9 +62,13 @@ const Header = () => {
       </AppBar>
       {/* Menu mobile que se despliega segun el state */}
       <Drawer elevation={16} anchor='left' variant='temporary' open={state}>
-        <Box sx={{ backgroundColor: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '40px', gap: '10px' }} height={'480px'} width={'250px'}>
-          <Typography fontSize={'20px'} fontWeight={600} color={'#415A77'}>CODESUE</Typography>
+        <Box sx={{ backgroundColor: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly', paddingTop: '40px', gap: '10px' }} height={'480px'} width={'350px'}>
 
+          <IconButton sx={{ border: '1px solid #415A77' }} size='large' onClick={handleOpenMenu}>
+            <CloseIcon />
+          </IconButton>
+          <Typography fontSize={'20px'} fontWeight={600} color={'#415A77'}>CODESUE</Typography>
+          {/* render cada item */}
           <List sx={{ width: '90%' }}>
             <Divider variant='fullWidth' />
             {ITEMS_MENU.map(({ item, to, id, Icon }) =>
@@ -81,22 +85,17 @@ const Header = () => {
               </Box>
             )}
           </List>
-          <Box height={'100px'} display={'flex'} justifyContent={'center'} flexDirection={'column'} gap={'5px'}>
-            <Button sx={{ fontWeight: '700', fontSize: '11px', width: '200px', color: 'white', borderColor: '#415A77' }} variant='contained'>Registrate</Button>
-            <Button sx={{ fontWeight: '700', fontSize: '11px', width: '200px', color: '#415A77', borderColor: '#415A77' }} variant='outlined'>Prueba como Visitante</Button>
+          <Box width={'90%'} height={'100px'} display={'flex'} justifyContent={'center'} flexDirection={'column'} gap={'5px'}>
+            <Button sx={{ height: '50px', fontWeight: '700', fontSize: '11px', width: '100%', color: 'white', borderColor: '#415A77' }} variant='contained'>Registrate</Button>
+            <Button sx={{ height: '50px', fontWeight: '700', fontSize: '11px', width: '100%', color: '#415A77', borderColor: '#415A77' }} variant='outlined'>Prueba como Visitante</Button>
           </Box>
 
-          <Box position={'relative'} bottom={'-230px'}>
-            <IconButton sx={{ border: '1px solid #415A77' }} size='large' onClick={handleOpenMenu}>
-              <CloseIcon />
-            </IconButton>
-            <Typography mt={'10px'} width={'100%'} textAlign={'center'} variant='body2' color={'gray'}>v1.0.0</Typography>
-          </Box>
+          <Typography mt={'10px'} width={'100%'} textAlign={'center'} variant='body2' color={'gray'}>v1.0.0</Typography>
 
         </Box>
-      </Drawer>
+      </Drawer >
 
-    </Box>
+    </Box >
   )
 }
 

@@ -3,7 +3,7 @@ import './Hero.css'
 const Hero = () => {
   return (
     <Box component={'div'} id='inicio' className='c-hero-principal'>
-      <Box width={'420px'} height={'370px'} sx={{ backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover', backgroundImage: 'url(/src/assets/img/imgHero.png)' }}></Box>
+      <Box width={'420px'} height={'370px'} sx={{ backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover', backgroundImage: 'url(src/assets/img/imgHero.png)' }}></Box>
       <div className='c-hero-bg-lineas'>
         <div className='c-hero-info'>
           <Typography variant='h7'>CodeSue editor de codigo</Typography>
@@ -12,8 +12,8 @@ const Hero = () => {
         </div>
 
         <div className='c-h-buttons'>
-          <Button sx={{ fontWeight: '700', fontSize: '11px', width: '200px', color: 'white', borderColor: 'white' }} variant='outlined'>Prueba como Visitante</Button>
-          <Button sx={{ fontWeight: '700', fontSize: '10px', width: '150px', backgroundColor: '#0d1b2a', padding: '8px' }} variant='contained'>Registrate</Button>
+          <Button sx={{ height: '38px', fontWeight: '700', fontSize: '11px', width: '200px', color: 'white', borderColor: 'white' }} variant='outlined'>Prueba como Visitante</Button>
+          <Button sx={{ height: '40px', fontWeight: '700', fontSize: '10px', width: '150px', backgroundColor: '#0d1b2a', padding: '8px' }} variant='contained'>Registrate</Button>
         </div>
       </div>
 
