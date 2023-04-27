@@ -2,8 +2,7 @@ import { Button, Typography, Box } from '@mui/material'
 import './Hero.css'
 const Hero = () => {
   return (
-    // C:\Users\pc\Desktop\Web developer\PROYECTO-EDITOR-CODIGO\Editor-Codigo\src\assets\img\imgHero.png
-    <div className='c-hero-principal'>
+    <Box component={'div'} id='inicio' className='c-hero-principal'>
       <Box width={'420px'} height={'370px'} sx={{ backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover', backgroundImage: 'url(/src/assets/img/imgHero.png)' }}></Box>
       <div className='c-hero-bg-lineas'>
         <div className='c-hero-info'>
@@ -18,7 +17,7 @@ const Hero = () => {
         </div>
       </div>
 
-    </div >
+    </Box >
   )
 }
 

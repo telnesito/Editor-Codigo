@@ -25,12 +25,22 @@ const Plantillas = () => {
         descripcion: 'Codifica y corre el famoso algoritmo "Fizz Buzz" en Ruby!',
         id: generateUniqueId()
       },
+      {
+        nombre: 'Generate random number',
+        descripcion: 'Codifica y corre el famoso algoritmo "Generate random number" en Ruby!',
+        id: generateUniqueId()
+      },
+      {
+        nombre: 'Generate random ID',
+        descripcion: 'Codifica y corre el famoso algoritmo "Generate random ID" en Ruby!',
+        id: generateUniqueId()
+      },
 
     ]
 
 
   return (
-    <div className="c-plantillas-principal">
+    <div id='plantillas' className="c-plantillas-principal">
       <div className='c-plantillas-title'>
         <Typography sx={{ color: '#43ACD9', fontWeight: '700', fontSize: '17px' }}>PLANTILLAS</Typography>
         <Typography top='-8px' position='relative' variant='h4' sx={{ fontWeight: '700' }}>Comienza a codificar</Typography>

@@ -40,7 +40,7 @@ const Beneficios = () => {
 
 
   return (
-    <div className='c-beneficios-principal'>
+    <div id='beneficios' className='c-beneficios-principal'>
       <div className='c-beneficios-title'>
         <Typography fontSize={'15px'} fontWeight={700} sx={{ position: 'relative', top: '7px', color: '#82BC7D' }}>¿POR QUE CODESUE?</Typography>
         <Typography fontSize={'30px'} fontWeight={700}>Beneficios de CodeSue</Typography>

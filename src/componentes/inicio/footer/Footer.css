@@ -1,4 +1,8 @@
 .c-footer-principal {
-  height: 1000px;
+  /* height: 900px; */
   background-color: var(--onActionColor);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
