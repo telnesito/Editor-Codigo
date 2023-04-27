@@ -48,7 +48,7 @@ const Login = () => {
 
           />
 
-          <Button sx={{ mt: '30px', mb: '10px', height: '50px', fontWeight: '700' }} variant='contained' type='submit'>Ingresar</Button>
+          <Button sx={{ mt: '30px', mb: '10px', height: '70px', fontWeight: '700' }} variant='contained' type='submit'>Ingresar</Button>
         </form>
       </Box>
 
