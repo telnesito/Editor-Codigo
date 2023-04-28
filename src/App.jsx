@@ -10,7 +10,7 @@ function App() {
 
       <Routes >
         <Route path='/' element={<Inicio />} ></Route>
-        <Route path='/gestion-de-sesion' element={<Auth />}></Route>
+        <Route path='/gestion-de-sesion' element={<Auth />} exact ></Route>
 
         <Route path='*' element={<h1>Pagina no encontrada</h1>}></Route>
       </Routes>
