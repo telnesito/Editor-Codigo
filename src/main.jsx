@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import ScrollToTop from './functions/ScrollToTop.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter basename='/routes'>
+  <BrowserRouter basename='/'>
     <ScrollToTop />
     <App />
   </BrowserRouter>,
