@@ -42,8 +42,8 @@ const Plantillas = () => {
   return (
     <div id='plantillas' className="c-plantillas-principal">
       <div className='c-plantillas-title'>
-        <Typography sx={{ color: '#43ACD9', fontWeight: '700', fontSize: '17px' }}>PLANTILLAS</Typography>
-        <Typography top='-8px' position='relative' variant='h4' sx={{ fontWeight: '700' }}>Comienza a codificar</Typography>
+        <Typography sx={{ color: '#43ACD9', fontWeight: '700', fontSize: '20px' }}>PLANTILLAS</Typography>
+        <Typography top='-8px' position='relative' fontSize={'30px'} sx={{ fontWeight: '700' }}>Comienza a codificar</Typography>
       </div>
 
       <div className='c-plantillas-info'>

@@ -42,12 +42,12 @@ const Beneficios = () => {
   return (
     <div id='beneficios' className='c-beneficios-principal'>
       <div className='c-beneficios-title'>
-        <Typography fontSize={'15px'} fontWeight={700} sx={{ position: 'relative', top: '7px', color: '#82BC7D' }}>¿POR QUE CODESUE?</Typography>
+        <Typography fontSize={'20px'} fontWeight={700} sx={{ position: 'relative', top: '7px', color: '#82BC7D' }}>¿POR QUE CODESUE?</Typography>
         <Typography fontSize={'30px'} fontWeight={700}>Beneficios de CodeSue</Typography>
       </div>
       <Button sx={{ fontWeight: '700', backgroundColor: '#82BC7D' }} size='large' variant='contained'>Prueba ahora</Button>
 
-      <div>
+      <Box width={'90%'}>
         {BENEFICIOS.map(({ title, descripcion, img, id }) =>
           <Box marginTop={'10px'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} key={id}>
 
@@ -60,7 +60,7 @@ const Beneficios = () => {
 
         )}
 
-      </div>
+      </Box>
 
 
     </div>
