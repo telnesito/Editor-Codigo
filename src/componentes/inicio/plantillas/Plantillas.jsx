@@ -7,32 +7,32 @@ const Plantillas = () => {
     [
       {
         nombre: 'Hola Mundo',
-        descripcion: 'Codifica y corre el famoso algoritmo "Hola mundo" en Ruby!',
+        descripcion: 'La plantilla "Hola Mundo" es perfecta para aquellos que buscan familiarizarse con algunos de los algoritmos más famosos de la programación. Con esta plantilla, podrás aprender y practicar el algoritmo "Hola Mundo", que es la base de cualquier programa y el primer paso para entrar en el mundo de la programación.',
         id: generateUniqueId()
       },
       {
         nombre: 'Bubble Sort',
-        descripcion: 'Codifica y corre el famoso algoritmo "Bubble Sort" en Ruby!',
+        descripcion: 'La plantilla "Bubble Sort" es perfecta para aquellos que buscan aprender y practicar uno de los algoritmos de ordenamiento más conocidos: el Bubble Sort. Con esta plantilla, podrás entender cómo funciona este algoritmo y cómo se puede aplicar en diferentes situaciones.',
         id: generateUniqueId()
       },
       {
         nombre: 'Quick Sort',
-        descripcion: 'Codifica y corre el famoso algoritmo "Quick Sort" en Ruby!',
+        descripcion: 'La plantilla "Quick Sort" es una excelente herramienta para aquellos que quieren aprender sobre algoritmos de ordenamiento y cómo aplicarlos en diferentes situaciones. ¡Empieza hoy mismo y descubre el emocionante mundo de la programación!',
         id: generateUniqueId()
       },
       {
         nombre: 'Fizz Buzz',
-        descripcion: 'Codifica y corre el famoso algoritmo "Fizz Buzz" en Ruby!',
+        descripcion: 'La plantilla "Fizz Buzz" es una excelente herramienta para aquellos que quieren aprender programación de una manera divertida y práctica. ¡Empieza hoy mismo y descubre el emocionante mundo de la programación con el Fizz Buzz!',
         id: generateUniqueId()
       },
       {
         nombre: 'Generate random number',
-        descripcion: 'Codifica y corre el famoso algoritmo "Generate random number" en Ruby!',
+        descripcion: 'La generación de números aleatorios es una herramienta muy útil en la programación, ya sea para juegos, simulaciones o para cualquier aplicación que requiera de un elemento de azar. Con esta plantilla, podrás entender cómo funciona el algoritmo y cómo puedes utilizarlo para generar números aleatorios en tus programas.',
         id: generateUniqueId()
       },
       {
         nombre: 'Generate random ID',
-        descripcion: 'Codifica y corre el famoso algoritmo "Generate random ID" en Ruby!',
+        descripcion: 'Generar identificadores únicos y aleatorios es una tarea muy común en la programación, ya sea para asignar identificadores a usuarios, productos o cualquier otro elemento en una aplicación. Con esta plantilla, podrás entender cómo funciona el algoritmo y cómo puedes utilizarlo para generar identificadores únicos y aleatorios en tus programas.',
         id: generateUniqueId()
       },
 
@@ -55,8 +55,8 @@ const Plantillas = () => {
               <Typography fontSize='14px'>{descripcion}</Typography>
 
               <div className='c-plantillas-btn'>
-                <Button sx={{ backgroundColor: '#43ACD9', fontSize: '12px' }} size='small' variant='contained'>Editor</Button>
-                <Button sx={{ borderColor: 'white', color: 'white', fontSize: '12px' }} size='small' variant='outlined'>Ver</Button>
+                <Button sx={{ backgroundColor: '#43ACD9', fontSize: '12px' }} size='large' variant='contained'>Editor</Button>
+                <Button sx={{ borderColor: 'white', color: 'white', fontSize: '12px' }} size='large' variant='outlined'>Ver</Button>
               </div>
 
             </div>

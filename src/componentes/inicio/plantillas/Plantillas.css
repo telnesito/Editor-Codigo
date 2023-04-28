@@ -1,6 +1,6 @@
 .c-plantillas-principal {
   /* width: 100vw; */
-  height: 790px;
+  height: 1350px;
   background-color: var(--onActionColor);
 }
 
@@ -21,10 +21,13 @@
 
 .c-plantillas-plantilla {
   padding: 10px;
+  border-radius: 10px;
   width: 90%;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: rgba(44, 108, 164, 0.288);
 }
 
 .c-plantillas-btn {
