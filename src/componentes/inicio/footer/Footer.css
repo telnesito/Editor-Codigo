@@ -1,6 +1,6 @@
 .c-footer-principal {
   /* height: 900px; */
-  background-color: var(--onActionColor);
+  background-color: var(--secondaryColor);
   display: flex;
   flex-direction: column;
   justify-content: center;

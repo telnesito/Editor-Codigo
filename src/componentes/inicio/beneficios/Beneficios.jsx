@@ -51,10 +51,12 @@ const Beneficios = () => {
         {BENEFICIOS.map(({ title, descripcion, img, id }) =>
           <Box marginTop={'10px'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} key={id}>
 
-            <Box width={'80px'} height={'80px'} sx={{ backgroundImage: `url(${img})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}></Box>
+            <Box width={'60px'} height={'70px'} sx={{ backgroundImage: `url(${img})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}></Box>
 
-            <Typography paddingBottom={'10px'} fontSize={'20px'} color={'#E7EA73'} fontWeight={700}>{title}</Typography>
-            <Typography textAlign={'center'}>{descripcion}</Typography>
+            <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={'20px'}>
+              <Typography paddingBottom={'10px'} fontSize={'15px'} color={'#E7EA73'} fontWeight={700}>{title}</Typography>
+              <Typography fontSize={'14px'} textAlign={'center'}>{descripcion}</Typography>
+            </Box>
 
           </Box>
 

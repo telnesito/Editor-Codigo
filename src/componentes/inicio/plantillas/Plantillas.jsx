@@ -7,7 +7,7 @@ const Plantillas = () => {
     [
       {
         nombre: 'Hola Mundo',
-        descripcion: 'La plantilla "Hola Mundo" es perfecta para aquellos que buscan familiarizarse con algunos de los algoritmos más famosos de la programación. Con esta plantilla, podrás aprender y practicar el algoritmo "Hola Mundo", que es la base de cualquier programa y el primer paso para entrar en el mundo de la programación.',
+        descripcion: 'La plantilla "Hola Mundo" es perfecta para aquellos que buscan familiarizarse con algunos de los algoritmos más famosos de la programación. Con esta plantilla, podrás aprender y practicar el algoritmo "Hola Mundo", que es la base de cualquier programa.',
         id: generateUniqueId()
       },
       {
@@ -22,17 +22,17 @@ const Plantillas = () => {
       },
       {
         nombre: 'Fizz Buzz',
-        descripcion: 'La plantilla "Fizz Buzz" es una excelente herramienta para aquellos que quieren aprender programación de una manera divertida y práctica. ¡Empieza hoy mismo y descubre el emocionante mundo de la programación con el Fizz Buzz!',
+        descripcion: 'La plantilla "Fizz Buzz" es una excelente herramienta para aquellos que quieren aprender programación de una manera divertida y práctica. ¡Empieza hoy mismo y descubre el emocionante mundo de la programación probando la plantilla de Fizz Buzz!',
         id: generateUniqueId()
       },
       {
-        nombre: 'Generate random number',
-        descripcion: 'La generación de números aleatorios es una herramienta muy útil en la programación, ya sea para juegos, simulaciones o para cualquier aplicación que requiera de un elemento de azar. Con esta plantilla, podrás entender cómo funciona el algoritmo y cómo puedes utilizarlo para generar números aleatorios en tus programas.',
+        nombre: 'Random number',
+        descripcion: 'La generación de números aleatorios es una herramienta muy útil en la programación, ya sea para juegos, simulaciones o para cualquier aplicación que requiera de un elemento de azar. Con esta plantilla, podrás entender cómo puedes utilizarlo para generar números aleatorios en tus programas.',
         id: generateUniqueId()
       },
       {
         nombre: 'Generate random ID',
-        descripcion: 'Generar identificadores únicos y aleatorios es una tarea muy común en la programación, ya sea para asignar identificadores a usuarios, productos o cualquier otro elemento en una aplicación. Con esta plantilla, podrás entender cómo funciona el algoritmo y cómo puedes utilizarlo para generar identificadores únicos y aleatorios en tus programas.',
+        descripcion: 'Generar identificadores únicos y aleatorios es una tarea muy común en la programación, ya sea para asignar identificadores a usuarios, productos o cualquier otro elemento en una aplicación. Con esta plantilla, podrás entender cómo funciona el algoritmo.',
         id: generateUniqueId()
       },
 
@@ -42,7 +42,7 @@ const Plantillas = () => {
   return (
     <div id='plantillas' className="c-plantillas-principal">
       <div className='c-plantillas-title'>
-        <Typography sx={{ color: '#43ACD9', fontWeight: '700', fontSize: '20px' }}>PLANTILLAS</Typography>
+        <Typography sx={{ color: '#82BC7D', fontWeight: '700', fontSize: '20px' }}>PLANTILLAS</Typography>
         <Typography top='-8px' position='relative' fontSize={'30px'} sx={{ fontWeight: '700' }}>Comienza a codificar</Typography>
       </div>
 
@@ -50,12 +50,12 @@ const Plantillas = () => {
         {
           PLANTILLAS.map(({ nombre, descripcion, id }) =>
             <div className='c-plantillas-plantilla' key={id}>
-              <Typography fontSize='15px' fontWeight='700'>{nombre}</Typography>
+              <Typography padding={'5px'} textAlign={'center'} color={'#82BC7D'} fontSize='15px' fontWeight='700'>{nombre}</Typography>
               <Divider />
-              <Typography fontSize='14px'>{descripcion}</Typography>
+              <Typography textAlign={'justify'} height={'250px'} fontSize='14px'>{descripcion}</Typography>
 
               <div className='c-plantillas-btn'>
-                <Button sx={{ backgroundColor: '#43ACD9', fontSize: '12px' }} size='large' variant='contained'>Editor</Button>
+                <Button sx={{ backgroundColor: '#82BC7D', fontSize: '12px' }} size='large' variant='contained'>Editor</Button>
                 <Button sx={{ borderColor: 'white', color: 'white', fontSize: '12px' }} size='large' variant='outlined'>Ver</Button>
               </div>
 

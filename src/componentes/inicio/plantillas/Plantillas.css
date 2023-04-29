@@ -1,6 +1,10 @@
 .c-plantillas-principal {
   /* width: 100vw; */
-  height: 1350px;
+  height: 1250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: var(--onActionColor);
 }
 
@@ -13,16 +17,16 @@
 }
 
 .c-plantillas-info {
+  gap: 10px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* width: 100vw; */
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .c-plantillas-plantilla {
   padding: 10px;
   border-radius: 10px;
-  width: 90%;
+  width: 40%;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -34,6 +38,8 @@
   margin-top: 10px;
   display: flex;
   gap: 15px;
+  align-items: center;
+  justify-content: center;
 }
 
 .c-plantillas-bg-lineas {

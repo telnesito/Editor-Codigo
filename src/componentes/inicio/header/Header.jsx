@@ -66,10 +66,10 @@ const Header = () => {
       <Drawer elevation={16} anchor='left' variant='temporary' open={state}>
         <Box sx={{ backgroundColor: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly', paddingTop: '40px', gap: '10px' }} height={'480px'} width={'350px'}>
 
-          <IconButton sx={{ border: '1px solid #415A77' }} size='large' onClick={handleOpenMenu}>
+          <IconButton sx={{ border: '1px solid #82BC7D' }} size='large' onClick={handleOpenMenu}>
             <CloseIcon />
           </IconButton>
-          <Typography fontSize={'20px'} fontWeight={600} color={'#415A77'}>CODESUE</Typography>
+          <Typography fontSize={'20px'} fontWeight={600} color={'#82BC7D'}>CODESUE</Typography>
           {/* render cada item */}
           <List sx={{ width: '90%' }}>
             <Divider variant='fullWidth' />
@@ -78,7 +78,7 @@ const Header = () => {
                 <ListItem onClick={handleOpenMenu} disablePadding>
                   <ListItemButton href={to}>
                     <ListItemIcon>
-                      {<Icon sx={{ color: '#415A77' }} />}
+                      {<Icon sx={{ color: '#82BC7D' }} />}
                     </ListItemIcon>
                     <ListItemText primary={item}></ListItemText>
                   </ListItemButton>
@@ -88,8 +88,8 @@ const Header = () => {
             )}
           </List>
           <Box width={'90%'} height={'100px'} display={'flex'} justifyContent={'center'} flexDirection={'column'} gap={'5px'}>
-            <Button sx={{ height: '50px', fontWeight: '700', fontSize: '11px', width: '100%', color: 'white', borderColor: '#415A77' }} variant='contained'>Registrate</Button>
-            <Button sx={{ height: '50px', fontWeight: '700', fontSize: '11px', width: '100%', color: '#415A77', borderColor: '#415A77' }} variant='outlined'>Prueba como Visitante</Button>
+            <Button sx={{ height: '50px', fontWeight: '700', fontSize: '11px', width: '100%', bgcolor: '#82BC7D', color: 'white', borderColor: '#82BC7D' }} variant='contained'>Registrate</Button>
+            <Button sx={{ height: '50px', fontWeight: '700', fontSize: '11px', width: '100%', color: '#415A77', borderColor: '#82BC7D' }} variant='outlined'>Prueba como Visitante</Button>
           </Box>
 
           <Typography mt={'10px'} width={'100%'} textAlign={'center'} variant='body2' color={'gray'}>v1.0.0</Typography>
