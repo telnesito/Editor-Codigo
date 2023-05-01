@@ -7,11 +7,7 @@ const Plantillas = () => {
     [
       {
         nombre: 'Hola Mundo',
-<<<<<<< HEAD
         descripcion: 'La plantilla "Hola Mundo" es perfecta para aquellos que buscan familiarizarse con algunos de los algoritmos más famosos de la programación. Con esta plantilla, podrás aprender y practicar el algoritmo "Hola Mundo", que es la base de cualquier programa.',
-=======
-        descripcion: 'Codifica y corre el famoso algoritmo "Hola mundo" en Ruby!',
->>>>>>> parent of ad8928a (cambios-plantilla)
         id: generateUniqueId()
       },
       {
@@ -26,30 +22,17 @@ const Plantillas = () => {
       },
       {
         nombre: 'Fizz Buzz',
-<<<<<<< HEAD
         descripcion: 'La plantilla "Fizz Buzz" es una excelente herramienta para aquellos que quieren aprender programación de una manera divertida y práctica. ¡Empieza hoy mismo y descubre el emocionante mundo de la programación probando la plantilla de Fizz Buzz!',
         id: generateUniqueId()
       },
       {
         nombre: 'Random number',
         descripcion: 'La generación de números aleatorios es una herramienta muy útil en la programación, ya sea para juegos, simulaciones o para cualquier aplicación que requiera de un elemento de azar. Con esta plantilla, podrás entender cómo puedes utilizarlo para generar números aleatorios en tus programas.',
-=======
-        descripcion: 'Codifica y corre el famoso algoritmo "Fizz Buzz" en Ruby!',
-        id: generateUniqueId()
-      },
-      {
-        nombre: 'Generate random number',
-        descripcion: 'Codifica y corre el famoso algoritmo "Generate random number" en Ruby!',
->>>>>>> parent of ad8928a (cambios-plantilla)
         id: generateUniqueId()
       },
       {
         nombre: 'Generate random ID',
-<<<<<<< HEAD
         descripcion: 'Generar identificadores únicos y aleatorios es una tarea muy común en la programación, ya sea para asignar identificadores a usuarios, productos o cualquier otro elemento en una aplicación. Con esta plantilla, podrás entender cómo funciona el algoritmo.',
-=======
-        descripcion: 'Codifica y corre el famoso algoritmo "Generate random ID" en Ruby!',
->>>>>>> parent of ad8928a (cambios-plantilla)
         id: generateUniqueId()
       },
 
@@ -72,13 +55,8 @@ const Plantillas = () => {
               <Typography textAlign={'justify'} height={'250px'} fontSize='14px'>{descripcion}</Typography>
 
               <div className='c-plantillas-btn'>
-<<<<<<< HEAD
                 <Button sx={{ backgroundColor: '#82BC7D', fontSize: '12px' }} size='large' variant='contained'>Editor</Button>
                 <Button sx={{ borderColor: 'white', color: 'white', fontSize: '12px' }} size='large' variant='outlined'>Ver</Button>
-=======
-                <Button sx={{ backgroundColor: '#43ACD9', fontSize: '12px' }} size='small' variant='contained'>Editor</Button>
-                <Button sx={{ borderColor: 'white', color: 'white', fontSize: '12px' }} size='small' variant='outlined'>Ver</Button>
->>>>>>> parent of ad8928a (cambios-plantilla)
               </div>
 
             </div>
