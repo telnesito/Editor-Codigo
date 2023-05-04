@@ -29,7 +29,6 @@ const Login = () => {
       alignItems={'center'}
       justifyContent={'space-around'}
       minHeight={'600px'}
-      height={{ xs: '100vh', lg: '100%', md: '100%', sm: '100%' }}
 
     >
 
@@ -81,7 +80,7 @@ const Login = () => {
         <Typography sx={{ cursor: 'pointer' }} onClick={() => navigate('/authenticator/singup')} fontWeight={700} color={'#415A77'}>Register!</Typography>
 
       </Box>
-    </Box >
+    </Box>
   )
 }
 

@@ -76,16 +76,10 @@ const SingUp = () => {
 
     >
 
-      <Box width={'90%'}>
-        <IconButton size="large" onClick={() => navigate('/authenticator/login')}>
-          <ArrowBackIcon className='icon-back-login' />
-        </IconButton>
-        <Typography component={'span'} variant="body2" color={'black'}>Log In</Typography>
-      </Box>
 
       <Box textAlign={'center'}>
         <Typography fontSize={'25px'} fontWeight={700} color={'#415A77'}>Create an account</Typography>
-        <Typography color={'black'}>Sign up now and unlock exclusive tools!</Typography>
+        <Typography color={'gray'}>Sign up now and unlock exclusive tools!</Typography>
       </Box>
       {/* Formulario de registro */}
       <form className="c-form" onSubmit={formik.handleSubmit}>
@@ -169,7 +163,11 @@ const SingUp = () => {
 
 
         <Button sx={{ height: '50px', fontWeight: '700' }} variant='contained' type='submit'>Create account</Button>
+        <Box display={'flex'} alignSelf={'center'} gap={'5px'}>
+          <Typography component={'div'} color={'gray'}>Tienes una cuenta?</Typography>
+          <Typography sx={{ cursor: 'pointer' }} onClick={() => navigate('/authenticator/login')} fontWeight={700} color={'#415A77'}>Inicia sesion!</Typography>
 
+        </Box>
       </form>
       {/* Modal de verificacion de correo */}
       <Modal
