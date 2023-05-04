@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   /* width: 100vw; */
-  height: 1100px;
-  background-color: var(--onActionColor);
+  height: 750px;
+  background-color: white;
+  color: black;
 }
 
 .c-beneficios-title {
@@ -13,6 +13,24 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 90px;
+  width: 90%;
+  padding: 70px;
+  gap: 15px;
+}
+@media screen and (max-width: 1390px) {
+  .c-beneficios-principal {
+    height: 990px;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .c-beneficios-principal {
+    height: 1050px;
+  }
+}
+
+@media screen and (max-width: 787px) {
+  .c-beneficios-principal {
+    height: 1700px;
+  }
 }

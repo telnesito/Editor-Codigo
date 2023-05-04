@@ -1,42 +1,6 @@
-.c-hero-principal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 30px;
-  width: 100%;
-  gap: 15px;
-  height: 450px;
-  min-height: 450px;
-
-  background: linear-gradient(#0d1b2a, #0d1b2a, #09386e);
+:root {
+  --backgroundHero: #111151;
 }
-
-.c-hero-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 90%;
-}
-
-.c-h-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  width: 90%;
-  gap: 10px;
-}
-
-.c-hero-bg-lineas {
-  /* background-image: url(/src/assets/img/lineasHero.png); */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
+.icon {
+  margin-left: 5px;
 }

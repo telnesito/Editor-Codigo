@@ -1,11 +1,11 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import { BrowserRouter } from 'react-router-dom'
-import ScrollToTop from './functions/ScrollToTop.js'
+import { RouterProvider, ScrollRestoration } from 'react-router-dom'
+import Router from './routes/index.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter basename='/'>
-    <ScrollToTop />
+  <RouterProvider router={Router}>
+    <ScrollRestoration />
     <App />
-  </BrowserRouter>,
+  </RouterProvider>,
 )

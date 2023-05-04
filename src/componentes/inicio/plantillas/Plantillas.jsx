@@ -1,4 +1,4 @@
-import { Typography, Button, Divider } from '@mui/material'
+import { Typography, Button } from '@mui/material'
 import './Plantillas.css'
 import generateUniqueId from 'generate-unique-id'
 const Plantillas = () => {
@@ -12,12 +12,12 @@ const Plantillas = () => {
       },
       {
         nombre: 'Bubble Sort',
-        descripcion: 'Codifica y corre el famoso algoritmo "Bubble Sort" en Ruby!',
+        descripcion: 'La plantilla "Bubble Sort" es perfecta para aquellos que buscan aprender y practicar uno de los algoritmos de ordenamiento más conocidos: el Bubble Sort. Con esta plantilla, podrás entender cómo funciona este algoritmo y cómo se puede aplicar en diferentes situaciones.',
         id: generateUniqueId()
       },
       {
         nombre: 'Quick Sort',
-        descripcion: 'Codifica y corre el famoso algoritmo "Quick Sort" en Ruby!',
+        descripcion: 'La plantilla "Quick Sort" es una excelente herramienta para aquellos que quieren aprender sobre algoritmos de ordenamiento y cómo aplicarlos en diferentes situaciones. ¡Empieza hoy mismo y descubre el emocionante mundo de la programación!',
         id: generateUniqueId()
       },
       {
@@ -41,6 +41,7 @@ const Plantillas = () => {
 
   return (
     <div id='plantillas' className="c-plantillas-principal">
+
       <div className='c-plantillas-title'>
         <Typography sx={{ color: '#82BC7D', fontWeight: '700', fontSize: '20px' }}>PLANTILLAS</Typography>
         <Typography top='-8px' position='relative' fontSize={'30px'} sx={{ fontWeight: '700' }}>Comienza a codificar</Typography>
@@ -50,9 +51,8 @@ const Plantillas = () => {
         {
           PLANTILLAS.map(({ nombre, descripcion, id }) =>
             <div className='c-plantillas-plantilla' key={id}>
-              <Typography padding={'5px'} textAlign={'center'} color={'#82BC7D'} fontSize='15px' fontWeight='700'>{nombre}</Typography>
-              <Divider />
-              <Typography textAlign={'justify'} height={'250px'} fontSize='14px'>{descripcion}</Typography>
+              <Typography textAlign={'left'} color={'#82BC7D'} fontSize='15px' fontWeight='700'>{nombre}</Typography>
+              <Typography textAlign={'left'} fontSize='14px'>{descripcion}</Typography>
 
               <div className='c-plantillas-btn'>
                 <Button sx={{ backgroundColor: '#82BC7D', fontSize: '12px' }} size='large' variant='contained'>Editor</Button>

@@ -25,8 +25,14 @@ const Header = () => {
         id: generateUniqueId()
       },
       {
-        item: 'Plantillas',
-        to: '#plantillas',
+        item: 'Lenguajes',
+        to: '#lenaguajes',
+        Icon: SourceIcon,
+        id: generateUniqueId()
+      },
+      {
+        item: 'Demo',
+        to: '#demo',
         Icon: SourceIcon,
         id: generateUniqueId()
       },
@@ -52,24 +58,32 @@ const Header = () => {
       {/* nav */}
       <AppBar position='static'>
         <Toolbar sx={{ backgroundColor: 'white', height: '70px' }}>
-          <IconButton onClick={handleOpenMenu} size='large' edge='start' color='black'
+          <IconButton sx={{ display: { lg: 'none', xs: 'block', md: 'none' } }} onClick={handleOpenMenu} size='large' edge='start' color='black'
           >
             <MenuIcon />
 
           </IconButton>
-          <Typography variant='h7' color={'black'} component={'div'} sx={{ flexGrow: 1 }}>CODESUE</Typography>
-          <Button onClick={() => navigate('/gestion-de-sesion')} variant='text' sx={{ color: 'black' }}>Log In</Button>
+          <Typography variant='h6' fontWeight={700} color={'#111151'} component={'div'} sx={{ flexGrow: 1 }}>CODESUE</Typography>
+          <Box width={'100%'} display={{ lg: 'flex', xs: 'none', md: 'flex' }} alignItems={'center'} justifyContent={'center'}>
+            {ITEMS_MENU.map(({ id, item, to }) => <Button key={id} href={to}>{item}</Button>)}
+
+          </Box>
+          <Box display={{ lg: 'flex', md: 'flex', xs: 'none' }} gap={'10px'}>
+            <Button onClick={() => navigate('/authenticator/login')} variant='contained' sx={{ color: 'white', width: '100px' }}>Log In</Button>
+            <Button onClick={() => navigate('/authenticator/singup')} variant='outlined' sx={{ color: 'black', width: '100px' }}>Sign Up</Button>
+          </Box>
+
         </Toolbar>
 
       </AppBar>
       {/* Menu mobile que se despliega segun el state */}
       <Drawer elevation={16} anchor='left' variant='temporary' open={state}>
-        <Box sx={{ backgroundColor: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly', paddingTop: '40px', gap: '10px' }} height={'480px'} width={'350px'}>
+        <Box sx={{ backgroundColor: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly', paddingTop: '40px', gap: '10px' }} height={'480px'} width={'80vw'}>
 
-          <IconButton sx={{ border: '1px solid #82BC7D' }} size='large' onClick={handleOpenMenu}>
+          <IconButton sx={{ border: '1px solid #111151' }} size='large' onClick={handleOpenMenu}>
             <CloseIcon />
           </IconButton>
-          <Typography fontSize={'20px'} fontWeight={600} color={'#82BC7D'}>CODESUE</Typography>
+          <Typography fontSize={'20px'} fontWeight={600} color={'#111151'}>CODESUE</Typography>
           {/* render cada item */}
           <List sx={{ width: '90%' }}>
             <Divider variant='fullWidth' />
@@ -78,7 +92,7 @@ const Header = () => {
                 <ListItem onClick={handleOpenMenu} disablePadding>
                   <ListItemButton href={to}>
                     <ListItemIcon>
-                      {<Icon sx={{ color: '#82BC7D' }} />}
+                      {<Icon sx={{ color: '#111151' }} />}
                     </ListItemIcon>
                     <ListItemText primary={item}></ListItemText>
                   </ListItemButton>
@@ -88,16 +102,16 @@ const Header = () => {
             )}
           </List>
           <Box width={'90%'} height={'100px'} display={'flex'} justifyContent={'center'} flexDirection={'column'} gap={'5px'}>
-            <Button sx={{ height: '50px', fontWeight: '700', fontSize: '11px', width: '100%', bgcolor: '#82BC7D', color: 'white', borderColor: '#82BC7D' }} variant='contained'>Registrate</Button>
-            <Button sx={{ height: '50px', fontWeight: '700', fontSize: '11px', width: '100%', color: '#415A77', borderColor: '#82BC7D' }} variant='outlined'>Prueba como Visitante</Button>
+            <Button onClick={() => navigate('/authenticator/login')} sx={{ height: '50px', fontWeight: '700', fontSize: '11px', width: '100%', color: 'white', borderColor: '#82BC7D' }} variant='contained'>Inicia sesion</Button>
+            <Button onClick={() => navigate('/authenticator/singup')} sx={{ height: '50px', fontWeight: '700', fontSize: '11px', width: '100%', color: 'black' }} variant='outlined'>Registrate</Button>
           </Box>
 
           <Typography mt={'10px'} width={'100%'} textAlign={'center'} variant='body2' color={'gray'}>v1.0.0</Typography>
 
         </Box>
-      </Drawer >
+      </Drawer>
 
-    </Box >
+    </Box>
   )
 }
 
