@@ -65,8 +65,9 @@ const SingUp = () => {
 
   return (
     <Box
+
       width={'100%'}
-      height={'600px'}
+      minHeight={'600px'}
       bgcolor={'white'}
       display={'flex'}
       flexDirection={'column'}
@@ -183,6 +184,7 @@ const SingUp = () => {
           color={'black'}
           borderRadius={'10px'}
           boxShadow={'5px 5px 15px #00000080'}
+
           sx={{ gap: '20px', flexDirection: 'column', display: 'flex', alignItems: 'left', justifyContent: 'center' }}
         >
           <Box width={'90%'}>

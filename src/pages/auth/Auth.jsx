@@ -7,12 +7,13 @@ const Auth = () => {
 
   return (
     <Box
+      height={{ xs: '100vh', lg: '100%', md: '100%', sm: '100%' }}
       display={'flex'}
       width={'100%'}
       alignItems={'center'}
       justifyContent={'center'}
       bgcolor={'#111151'}
-      height={'750px'}
+      minHeight={'750px'}
       sx={{ backgroundImage: 'url(/img/ColoredShapes.svg)', backgroundSize: 'cover' }}
     >
       <Box
