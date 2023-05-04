@@ -1,7 +1,9 @@
 import "../login/Login.css"
 
-import { Box, Button, FormControl, Snackbar, InputLabel, MenuItem, Modal, Select, TextField, Typography, Alert } from "@mui/material"
+import { Box, Button, FormControl, Snackbar, InputLabel, IconButton, MenuItem, Modal, Select, TextField, Typography, Alert } from "@mui/material"
 import { useFormik } from "formik"
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -75,6 +77,13 @@ const SingUp = () => {
       width={'100%'}
 
     >
+
+      <Box width={'90%'}>
+        <IconButton onClick={() => navigate('/')} size='large'>
+          <ArrowBackIcon className='icon-back-login' />
+        </IconButton>
+        <Typography component={'span'} color={'black'} variant='body2'>Home</Typography>
+      </Box>
 
 
       {/* Formulario de registro */}
