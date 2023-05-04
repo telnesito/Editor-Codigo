@@ -65,13 +65,15 @@ const SingUp = () => {
   return (
     <Box
 
-      width={'100%'}
       minHeight={'600px'}
       bgcolor={'white'}
       display={'flex'}
       flexDirection={'column'}
       alignItems={'center'}
       justifyContent={'center'}
+      height={{ xs: '100vh' }}
+      width={'100%'}
+
 
     >
 
@@ -227,7 +229,7 @@ const SingUp = () => {
 
       </Snackbar>
 
-    </Box>
+    </Box >
   )
 }
 

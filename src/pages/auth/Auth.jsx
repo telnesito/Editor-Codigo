@@ -35,7 +35,9 @@ const Auth = () => {
 
       <Box
         sx={{ boxShadow: '15px 15px 10px #0d0d4990' }}
-        width={{ xs: '80%', lg: '30%', md: '35%' }}>
+        width={{ xs: '100%', lg: '30%', md: '35%' }}>
+
+
         <Outlet />
 
       </Box>
