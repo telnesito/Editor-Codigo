@@ -70,20 +70,19 @@ const SingUp = () => {
       display={'flex'}
       flexDirection={'column'}
       alignItems={'center'}
-      justifyContent={'center'}
-      height={{ xs: '100vh' }}
+      justifyContent={'space-around'}
+      height={{ xs: '100vh', lg: '650px', md: '650px', sm: '100vh' }}
       width={'100%'}
-
 
     >
 
 
-      <Box textAlign={'center'}>
-        <Typography fontSize={'25px'} fontWeight={700} color={'#415A77'}>Create an account</Typography>
-        <Typography color={'gray'}>Sign up now and unlock exclusive tools!</Typography>
-      </Box>
       {/* Formulario de registro */}
       <form className="c-form" onSubmit={formik.handleSubmit}>
+        <Box textAlign={'center'} mb={'20px'}>
+          <Typography fontSize={'25px'} fontWeight={700} color={'#415A77'}>Create an account</Typography>
+          <Typography color={'gray'}>Sign up now and unlock exclusive tools!</Typography>
+        </Box>
         <TextField
           fullWidth
           label='Username'
@@ -164,12 +163,12 @@ const SingUp = () => {
 
 
         <Button sx={{ height: '50px', fontWeight: '700' }} variant='contained' type='submit'>Create account</Button>
-        <Box display={'flex'} alignSelf={'center'} gap={'5px'}>
-          <Typography component={'div'} color={'gray'}>Tienes una cuenta?</Typography>
-          <Typography sx={{ cursor: 'pointer' }} onClick={() => navigate('/authenticator/login')} fontWeight={700} color={'#415A77'}>Inicia sesion!</Typography>
+      </form >
+      <Box display={'flex'} alignSelf={'center'} gap={'5px'}>
+        <Typography component={'div'} color={'gray'}>Tienes una cuenta?</Typography>
+        <Typography sx={{ cursor: 'pointer' }} onClick={() => navigate('/authenticator/login')} fontWeight={700} color={'#415A77'}>Inicia sesion!</Typography>
 
-        </Box>
-      </form>
+      </Box>
       {/* Modal de verificacion de correo */}
       <Modal
         open={open}

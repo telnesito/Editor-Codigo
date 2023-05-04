@@ -29,6 +29,7 @@ const Login = () => {
       alignItems={'center'}
       justifyContent={'space-around'}
       minHeight={'600px'}
+      height={{ xs: '100vh', lg: '650px', md: '650px', sm: '100vh' }}
 
     >
 
