@@ -1,8 +1,7 @@
 import "../login/Login.css"
 
-import { Box, Button, FormControl, Snackbar, IconButton, InputLabel, MenuItem, Modal, Select, TextField, Typography, Alert } from "@mui/material"
+import { Box, Button, FormControl, Snackbar, InputLabel, MenuItem, Modal, Select, TextField, Typography, Alert } from "@mui/material"
 import { useFormik } from "formik"
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
