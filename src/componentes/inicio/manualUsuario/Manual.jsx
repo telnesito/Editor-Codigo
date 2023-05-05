@@ -26,7 +26,7 @@ const Manual = () => {
         </Box>
 
         <Box textAlign={'center'} width={{ lg: '40%', xs: '90%', md: '90%', sm: '75%' }} >
-          <video height="350" autoPlay controls >
+          <video width={'100%'} height="350" autoPlay controls >
             <source src="/video/CA-intro_2MB.mp4" type="video/mp4" />
           </video>
         </Box>
