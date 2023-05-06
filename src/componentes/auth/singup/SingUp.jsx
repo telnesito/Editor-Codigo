@@ -72,7 +72,7 @@ const SingUp = () => {
       display={'flex'}
       flexDirection={'column'}
       alignItems={'center'}
-      justifyContent={'space-around'}
+      justifyContent={'center'}
       height={{ xs: '100vh', lg: '650px', md: '650px', sm: '100vh' }}
       width={'100%'}
 
@@ -88,7 +88,7 @@ const SingUp = () => {
 
       {/* Formulario de registro */}
       <form className="c-form" onSubmit={formik.handleSubmit}>
-        <Box textAlign={'center'} mb={'20px'}>
+        <Box textAlign={'center'} >
           <Typography fontSize={'25px'} fontWeight={700} color={'#415A77'}>Create an account</Typography>
           <Typography color={'gray'}>Sign up now and unlock exclusive tools!</Typography>
         </Box>
@@ -172,7 +172,7 @@ const SingUp = () => {
 
 
         <Button sx={{ height: '50px', fontWeight: '700' }} variant='contained' type='submit'>Create account</Button>
-      </form >
+      </form>
       <Box display={'flex'} alignSelf={'center'} gap={'5px'}>
         <Typography component={'div'} color={'gray'}>Tienes una cuenta?</Typography>
         <Typography sx={{ cursor: 'pointer' }} onClick={() => navigate('/authenticator/login')} fontWeight={700} color={'#415A77'}>Inicia sesion!</Typography>

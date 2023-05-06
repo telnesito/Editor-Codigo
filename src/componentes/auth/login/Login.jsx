@@ -8,6 +8,7 @@ const Login = () => {
   const navigate = useNavigate()
   const handleFormSubmit = (values) => {
     console.log(values)
+    navigate('/editor')
 
   }
 
