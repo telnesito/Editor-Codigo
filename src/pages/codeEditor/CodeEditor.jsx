@@ -1,8 +1,10 @@
-import { Box } from "@mui/material"
 import Nav from "../../componentes/codeEditor/nav/Nav"
-import Editor from "../../componentes/codeEditor/code/Editor"
-import Output from "../../componentes/codeEditor/code/Output"
+import { Box } from "@mui/material"
+
 import { CodeContextProvider } from "../../hooks/context/CodeContext"
+import { Outlet } from "react-router-dom"
+
+
 
 const CodeEditor = () => {
   return (
@@ -12,15 +14,9 @@ const CodeEditor = () => {
 
         <Box display={'flex'} width={'95%'} flexDirection={'column'}>
 
-          <Box display={'flex'} height={'100%'} width={'100%'}>
-            <Editor />
-
-            <Output />
-
-          </Box>
-
-
+          <Outlet />
         </Box>
+
 
       </CodeContextProvider>
 
