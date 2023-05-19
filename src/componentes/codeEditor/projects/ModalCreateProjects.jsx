@@ -2,11 +2,32 @@ import { Close } from '@mui/icons-material'
 import { Modal, Box, Paper, Typography, Card, CardContent, IconButton } from '@mui/material'
 import generateUniqueId from 'generate-unique-id'
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { ContextCode } from '../../../hooks/context/CodeContext'
 const ModalCreateProjects = ({ isOpen, closeModal }) => {
   const navigate = useNavigate()
+  const { Code, setCode } = useContext(ContextCode)
   const handleRuby = () => {
-    navigate('/home/editor')
+    navigate('/home/ruby')
+    setCode('')
   }
+
+  const handlePython = () => {
+    navigate('/home/python')
+    setCode('')
+
+  }
+
+  const handleJavascript = () => {
+    navigate('/home/javascript')
+    setCode('')
+
+  }
+
+  const handleWeb = () => {
+    navigate('/home/web')
+  }
+
 
   const LENGUAJES =
     [
@@ -14,12 +35,15 @@ const ModalCreateProjects = ({ isOpen, closeModal }) => {
         id: generateUniqueId(),
         title: 'Python',
         img: '/img/py.png',
+        event: handlePython
 
       },
       {
         id: generateUniqueId(),
         title: 'JavaScript',
-        img: '/img/javascript.png'
+        img: '/img/javascript.png',
+        event: handleJavascript
+
       },
       {
         id: generateUniqueId(),
@@ -30,7 +54,8 @@ const ModalCreateProjects = ({ isOpen, closeModal }) => {
       {
         id: generateUniqueId(),
         title: 'HTML',
-        img: '/img/html-5.png'
+        img: '/img/html-5.png',
+        event: handleWeb
       },
       {
         id: generateUniqueId(),

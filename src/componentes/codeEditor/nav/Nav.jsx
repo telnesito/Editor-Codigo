@@ -1,6 +1,5 @@
 import { AccountCircle, Folder, Home, Settings, } from "@mui/icons-material"
-import CodeIcon from '@mui/icons-material/Code';
-import { Box, IconButton } from "@mui/material"
+import { Box, IconButton, Tooltip } from "@mui/material"
 import generateUniqueId from "generate-unique-id"
 import { useNavigate } from "react-router-dom";
 const Nav = () => {
@@ -9,20 +8,16 @@ const Nav = () => {
 
   const MENU_EDITOR = [
 
-
-    {
-      id: generateUniqueId(),
-      Icon: CodeIcon,
-      event: () => navigate('editor')
-    },
     {
       id: generateUniqueId(),
       Icon: Folder,
+      title: 'Proyectos',
       event: () => navigate('proyectos')
     },
     {
       id: generateUniqueId(),
       Icon: Settings,
+      title: 'Ajustes',
       event: () => navigate('ajustes')
     },
 
@@ -30,21 +25,27 @@ const Nav = () => {
 
   return (
     <Box width={'5%'} minWidth={'70px'} alignItems={'center'} justifyContent={'space-between'} display={'flex'} flexDirection={'column'} bgcolor={'white'} height={'100vh'} minHeight={'700px'}>
-      <IconButton size="large">
-        <Home color="primary" />
-      </IconButton>
+      <Tooltip title={'Home'}>
+        <IconButton size="large">
+          <Home color="primary" />
+        </IconButton>
+      </Tooltip>
       <Box>
         {
-          MENU_EDITOR.map(({ id, Icon, event }) => <Box key={id}>
-            <IconButton onClick={event} size="large">
-              <Icon color="primary" />
-            </IconButton>
+          MENU_EDITOR.map(({ id, Icon, event, title }) => <Box key={id}>
+            <Tooltip title={title}>
+              <IconButton onClick={event} size="large">
+                <Icon color="primary" />
+              </IconButton>
+            </Tooltip>
           </Box>)
         }
       </Box>
-      <IconButton onClick={() => navigate('/')} size="large">
-        <AccountCircle color="primary" />
-      </IconButton>
+      <Tooltip title={'Perfil'}>
+        <IconButton onClick={() => navigate('/')} size="large">
+          <AccountCircle color="primary" />
+        </IconButton>
+      </Tooltip>
 
     </Box>
   )

@@ -1,8 +1,8 @@
 import { saveAs } from "file-saver"
-
-export const exportFile = (nombre, codigo) => {
+import generateUniqueId from "generate-unique-id"
+export const exportFile = (nombre, codigo, format) => {
   const contenido = codigo
-  const nombreArchivo = `${nombre}.rb`
+  const nombreArchivo = `${nombre}-${generateUniqueId()}.${format}`
 
   const archivo = new File([contenido], nombreArchivo, { type: 'text/plain' })
 
