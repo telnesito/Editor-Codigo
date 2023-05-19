@@ -34,15 +34,15 @@ const Nav = () => {
         <Home color="primary" />
       </IconButton>
       <Box>
-        `        {
+        {
           MENU_EDITOR.map(({ id, Icon, event }) => <Box key={id}>
             <IconButton onClick={event} size="large">
               <Icon color="primary" />
             </IconButton>
           </Box>)
-        }`
+        }
       </Box>
-      <IconButton onClick={() => perfilModal.openModal()} size="large">
+      <IconButton onClick={() => navigate('/')} size="large">
         <AccountCircle color="primary" />
       </IconButton>
 
