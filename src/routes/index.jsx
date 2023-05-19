@@ -5,7 +5,7 @@ import Login from "../componentes/auth/login/Login";
 import SingUp from "../componentes/auth/singup/SingUp";
 import CodeEditor from "../pages/codeEditor/CodeEditor";
 import IndexEditor from "../componentes/codeEditor/code/IndexEditor";
-import Projects from "../componentes/codeEditor/projects/projects";
+import Projects from "../componentes/codeEditor/projects/Projects";
 
 const Router = createBrowserRouter([
 
