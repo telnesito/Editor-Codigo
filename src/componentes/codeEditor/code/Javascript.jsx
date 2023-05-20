@@ -5,7 +5,7 @@ import JavaScriptOutput from "./JavaScriptOutput"
 const Javascript = () => {
   return (
     <Box display={'flex'} height={'100%'} width={'100%'}>
-      <Editor format={'.js'} tools={true} lenguaje={'Javascript'} color={'#EFD090'} icon={'/img/iconjs.png'} />
+      <Editor doc={'https://developer.mozilla.org/es/docs/Learn/JavaScript'} format={'.js'} tools={true} lenguaje={'Javascript'} color={'#EFD090'} icon={'/img/iconjs.png'} />
       <JavaScriptOutput />
     </Box>
   )

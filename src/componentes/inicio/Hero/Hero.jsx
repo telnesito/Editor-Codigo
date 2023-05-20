@@ -13,6 +13,7 @@ const Hero = () => {
         gap={'30px'}
         alignItems={'center'}
         justifyContent={'center'}
+        color={'white'}
 
       >
 

@@ -13,6 +13,7 @@ const Manual = () => {
 
   return (
     <Box
+      color={'white'}
       id={'demo'}
       bgcolor={'#111151'}
       height={{ lg: '600px', md: '750px', sm: '720px', xs: '760px' }}

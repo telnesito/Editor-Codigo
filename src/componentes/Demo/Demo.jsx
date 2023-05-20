@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Alert, AlertTitle, Box, Typography } from "@mui/material"
 import Header from "../inicio/header/Header"
 import Footer from "../inicio/footer/Footer"
 import { useState, useRef, useEffect } from "react"
@@ -50,6 +50,13 @@ const Demo = () => {
   return (
     <Box>
       <Header />
+
+      <Box height={'150px'} display={'flex'} justifyContent={'center'} alignItems={'center'} bgcolor={'#e1e1e1'} width={'100%'}>
+        <Alert sx={{ width: '80%' }} severity="warning">
+          <AlertTitle><strong>Atencion</strong></AlertTitle>
+          Todo el codigo que se escriba en el siguiente editor de texto no sera guardardo y se perdera al momento de reiniciar la pagina, es solo un entorno de pruebas. Para guardar la informacion es necesario <strong>iniciar sesion</strong>
+        </Alert>
+      </Box>
       <Box display={'flex'} bgcolor={'#e1e1e1'} alignItems={'center'} width={'100%'} height={'auto'} minHeight={'600px'}>
         <Box flexDirection={'column'} height={'600px'} width={'50%'} display={'flex'} alignItems={'center'} justifyContent={'center'} gap={'10px'}>
           <Box

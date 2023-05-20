@@ -5,7 +5,7 @@ const Footer = () => {
 
 
   return (
-    <Box id='sobre-nosotros' component={'footer'} sx={{ height: { xs: '900px', md: '350px' } }} className='c-footer-principal'>
+    <Box color={'white'} id='sobre-nosotros' component={'footer'} sx={{ height: { xs: '900px', md: '350px' } }} className='c-footer-principal'>
 
       <Box sx={{ flexDirection: { md: 'row', lg: 'row', xs: 'column' } }} gap={'30px'} display={'flex'} width={'90%'}>
 

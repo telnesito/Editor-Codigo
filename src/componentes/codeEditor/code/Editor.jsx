@@ -3,15 +3,17 @@ import { Editor as CodeEditor } from "@monaco-editor/react"
 import Loading from "./Loading"
 import { ContextCode } from "../../../hooks/context/CodeContext"
 import { useContext } from "react"
-import { Download, PlayArrow, Save, Upload } from "@mui/icons-material"
+import { Download, Help, PlayArrow, Save, Upload } from "@mui/icons-material"
 import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
 import { exportFile } from "../share/exportFile"
-
-const Editor = ({ lenguaje, icon, format, color, tools }) => {
+import useModal from "../../../hooks/state/useModal"
+import GuardarArchivo from "../GuardarArchivo/GuardarArchivo"
+const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
 
   const { Code, setCode } = useContext(ContextCode)
-  let codigo = ''
 
+  let codigo = ''
+  const { closeModal, isOpen, openModal } = useModal()
 
 
   const autoCompile = (value) => {
@@ -96,13 +98,13 @@ const Editor = ({ lenguaje, icon, format, color, tools }) => {
             </IconButton>
           </Tooltip>
 
-          <Tooltip title={'Guardar como'}>
-            <IconButton size="large">
-              <DriveFileMoveIcon />
+          <Tooltip title={`Documentacion de ${lenguaje.toLowerCase()}`}>
+            <IconButton href={doc} target="_blank" size="large">
+              <Help />
             </IconButton>
           </Tooltip>
           <Tooltip title={'Guardar'}>
-            <IconButton size="large">
+            <IconButton onClick={openModal} size="large">
               <Save />
             </IconButton>
           </Tooltip>
@@ -124,6 +126,8 @@ const Editor = ({ lenguaje, icon, format, color, tools }) => {
 
         </Box>
       </Box>}
+
+      {isOpen && <GuardarArchivo isOpen={isOpen} closeModal={closeModal} lenguaje={lenguaje} />}
     </Box>
   )
 }
