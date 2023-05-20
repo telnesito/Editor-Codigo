@@ -1,10 +1,21 @@
 import { AccountCircle, Folder, Home, Settings, } from "@mui/icons-material"
-import { Box, IconButton, Tooltip } from "@mui/material"
+import { Box, IconButton, Modal, Tooltip } from "@mui/material"
 import generateUniqueId from "generate-unique-id"
 import { useNavigate } from "react-router-dom";
+import useModal from "../../../hooks/state/useModal";
+import PerfilModa from "../perfil/PerfilModal";
+import { useEffect } from "react"
+import "aos/dist/aos.css"
+import Aos from 'aos'
 const Nav = () => {
 
+  useEffect(() => {
+    Aos.init({ duration: 500 })
+  }, [])
+
   const navigate = useNavigate()
+  const { closeModal, isOpen, openModal } = useModal()
+
 
   const MENU_EDITOR = [
 
@@ -14,19 +25,19 @@ const Nav = () => {
       title: 'Proyectos',
       event: () => navigate('proyectos')
     },
-    {
-      id: generateUniqueId(),
-      Icon: Settings,
-      title: 'Ajustes',
-      event: () => navigate('ajustes')
-    },
+
 
   ]
 
   return (
-    <Box width={'5%'} minWidth={'70px'} alignItems={'center'} justifyContent={'space-between'} display={'flex'} flexDirection={'column'} bgcolor={'white'} height={'100vh'} minHeight={'700px'}>
+    <Box width={'5%'} minWidth={'70px'} alignItems={'center'} justifyContent={'center'} display={'flex'} flexDirection={'column'} bgcolor={'white'} height={'100vh'} minHeight={'700px'}>
+      <Tooltip title={'Perfil'}>
+        <IconButton onClick={openModal} size="large">
+          <AccountCircle color="primary" />
+        </IconButton>
+      </Tooltip>
       <Tooltip title={'Home'}>
-        <IconButton size="large">
+        <IconButton onClick={() => navigate('/home/doc')} size="large">
           <Home color="primary" />
         </IconButton>
       </Tooltip>
@@ -41,11 +52,8 @@ const Nav = () => {
           </Box>)
         }
       </Box>
-      <Tooltip title={'Perfil'}>
-        <IconButton onClick={() => navigate('/')} size="large">
-          <AccountCircle color="primary" />
-        </IconButton>
-      </Tooltip>
+
+      {isOpen && <PerfilModa closeModal={closeModal} isOpen={isOpen} />}
 
     </Box>
   )

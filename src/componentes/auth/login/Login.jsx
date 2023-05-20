@@ -3,12 +3,20 @@ import { useFormik } from 'formik';
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useEffect } from "react"
+import "aos/dist/aos.css"
+import Aos from 'aos'
 
 const Login = () => {
+
+  useEffect(() => {
+    Aos.init({ duration: 500 })
+  }, [])
+
   const navigate = useNavigate()
   const handleFormSubmit = (values) => {
     console.log(values)
-    navigate('/home')
+    navigate('/home/doc')
 
   }
 
@@ -48,7 +56,7 @@ const Login = () => {
           <Typography width={'100%'} textAlign={'center'} color={'gray'}>Keep your data safe!</Typography>
 
         </Box>
-        <form className='c-form' onSubmit={formik.handleSubmit}>
+        <form className='c-form' onSubmit={formik.handleSubmit} data-aos="fade-left">
           <TextField
             fullWidth
             label='Email'

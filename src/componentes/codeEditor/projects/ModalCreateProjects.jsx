@@ -4,7 +4,15 @@ import generateUniqueId from 'generate-unique-id'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { ContextCode } from '../../../hooks/context/CodeContext'
+import { useEffect } from "react"
+import "aos/dist/aos.css"
+import Aos from 'aos'
 const ModalCreateProjects = ({ isOpen, closeModal }) => {
+
+  useEffect(() => {
+    Aos.init({ duration: 500 })
+  }, [])
+
   const navigate = useNavigate()
   const { Code, setCode } = useContext(ContextCode)
   const handleRuby = () => {
@@ -71,7 +79,7 @@ const ModalCreateProjects = ({ isOpen, closeModal }) => {
 
   return (
     <Modal sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} open={isOpen} onClose={closeModal}>
-      <Paper sx={{ width: '850px', height: '420px' }}>
+      <Paper data-aos="fade-up-left" sx={{ width: '850px', height: '420px' }}>
         <Box height={'50px'} alignItems={'center'} display={'flex'} justifyContent={'center'} width={'100%'}>
           <Typography fontWeight={700} width={'85%'}>Selecciona un lenguaje</Typography>
           <IconButton onClick={closeModal} size='large'>

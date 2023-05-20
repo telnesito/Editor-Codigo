@@ -38,6 +38,10 @@ const Editor = ({ lenguaje, icon, format, color, tools }) => {
       console.error('Error al leer el archivo:', error);
     }
   }
+  const editorOptions = {
+    lineNumbers: "on", // Mostrar número de línea
+    wordWrap: "on", // Envoltura automática de líneas
+  };
 
 
   return (
@@ -66,13 +70,15 @@ const Editor = ({ lenguaje, icon, format, color, tools }) => {
           </Typography>
         </Box>
         <CodeEditor
-          theme="vs-dark"
+          theme={'vs-dark'}
           language={lenguaje.toLowerCase()}
           height={'85%'}
           width={'100%'}
           onChange={autoCompile}
           loading={<Loading />}
           value={Code}
+          options={editorOptions}
+
         />
       </Box>
       {tools && <Box

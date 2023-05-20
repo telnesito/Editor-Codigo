@@ -6,8 +6,13 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import { useEffect } from "react"
+import "aos/dist/aos.css"
+import Aos from 'aos'
 const SingUp = () => {
+  useEffect(() => {
+    Aos.init({ duration: 500 })
+  }, [])
 
   const [open, setOpen] = useState(false)
   const [snackbar, setSnackbar] = useState(false)
@@ -87,7 +92,7 @@ const SingUp = () => {
 
 
       {/* Formulario de registro */}
-      <form className="c-form" onSubmit={formik.handleSubmit}>
+      <form data-aos="fade-right" className="c-form" onSubmit={formik.handleSubmit}>
         <Box textAlign={'center'} >
           <Typography fontSize={'25px'} fontWeight={700} color={'#415A77'}>Create an account</Typography>
           <Typography color={'gray'}>Sign up now and unlock exclusive tools!</Typography>

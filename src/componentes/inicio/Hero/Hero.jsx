@@ -34,7 +34,7 @@ const Hero = () => {
 
           <Typography>Esta herramienta es ideal para aquellos que trabajan en proyectos de desarrollo de software, diseño web o cualquier otra tarea que requiera la escritura de código.</Typography>
 
-          <Button sx={{ width: '250px' }} size='large' variant='contained'>Get started <EastIcon className='icon' /> </Button>
+          <Button href='#lenaguajes' sx={{ width: '250px' }} size='large' variant='contained'>Get started <EastIcon className='icon' /> </Button>
         </Box>
         <Box position={'absolute'} height={'500px'} width={'100%'} sx={{ backgroundImage: 'url(/img/ColoredShapes.svg)' }}>
         </Box>

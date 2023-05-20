@@ -52,10 +52,10 @@ const Projects = () => {
   return (
     <Box gap={'10px'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} height={'100%'} width={'100%'} bgcolor={'#e1e1e1'}>
 
-      <Box gap={'15px'} width={'95%'} height={'90%'} display={'flex'} flexDirection={'column'}>
+      <Box width={'100%'} height={'100%'} display={'flex'} flexDirection={'column'}>
 
-        <Paper sx={{ padding: '15px' }}>
-          <Box color={'black'} minHeight={'180px'} height={'auto'} width={'100%'} justifyContent={'center'} display={'flex'}>
+        <Paper sx={{ padding: '15px', backgroundImage: 'url(/img/ColoredShapes.svg)', backgroundPosition: 'center', backgroundSize: 'cover' }}>
+          <Box zIndex={'9999'} color={'black'} minHeight={'180px'} height={'auto'} width={'100%'} justifyContent={'center'} display={'flex'}>
 
             <Box justifyContent={'space-around'} display={'flex'} flexDirection={'column'} width={'40%'}>
               <Typography color={'#007ACC'} variant="h4">Administra tus proyectos</Typography>
@@ -99,7 +99,7 @@ const Projects = () => {
           </Box>
         </Paper>
 
-        <Paper sx={{ padding: '15px', overflowY: 'scroll' }}>
+        <Paper sx={{ padding: '15px', overflowY: 'scroll', height: '100%', }}>
           <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} width={'100%'}>
             <Typography color={'#007ACC'} variant="h4">Proyectos</Typography>
             <TextField sx={{ width: '20%' }} variant="standard" label={'Busqueda rapida'} type="text"></TextField>

@@ -1,7 +1,15 @@
 import { Typography, Box } from '@mui/material'
 import './Beneficios.css'
 import generateUniqueId from 'generate-unique-id'
+import { useEffect } from "react"
+import "aos/dist/aos.css"
+import Aos from 'aos'
 const Beneficios = () => {
+
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 })
+  }, [])
 
   const BENEFICIOS =
     [
@@ -48,8 +56,8 @@ const Beneficios = () => {
   return (
     <div id='beneficios' className='c-beneficios-principal'>
       <div className='c-beneficios-title'>
-        <Typography color={'#111151'} fontSize={'30px'} fontWeight={700}>Prefessional Services</Typography>
-        <Typography textAlign={'center'} width={{ lg: '65%', md: '80%' }} >Nuestra aplicación de editor de código en línea te ofrece múltiples beneficios, como soporte para múltiples lenguajes, herramientas profesionales para la escritura y edición de código, compilador automático para detectar errores y problemas, autocompletado para ahorrar tiempo y evitar errores comunes. Pruébala hoy mismo y descubre la diferencia en tu trabajo.</Typography>
+        <Typography data-aos="fade-left" color={'#111151'} fontSize={'30px'} fontWeight={700}>Prefessional Services</Typography>
+        <Typography data-aos="fade-right" textAlign={'center'} width={{ lg: '65%', md: '80%' }} >Nuestra aplicación de editor de código en línea te ofrece múltiples beneficios, como soporte para múltiples lenguajes, herramientas profesionales para la escritura y edición de código, compilador automático para detectar errores y problemas, autocompletado para ahorrar tiempo y evitar errores comunes. Pruébala hoy mismo y descubre la diferencia en tu trabajo.</Typography>
       </div>
 
 
@@ -60,6 +68,7 @@ const Beneficios = () => {
         alignItems={'center'}
         justifyContent={'center'}
         gap={'20px'}
+        data-aos="fade-up"
 
       >
         {BENEFICIOS.map(({ title, descripcion, img, id }) =>

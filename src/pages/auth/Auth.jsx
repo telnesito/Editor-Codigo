@@ -1,12 +1,17 @@
 import './Auth.css'
 import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
+import { useEffect } from "react"
+import "aos/dist/aos.css"
+import Aos from 'aos'
 const Auth = () => {
 
-
+  useEffect(() => {
+    Aos.init({ duration: 500 })
+  }, [])
 
   return (
-    <Box
+    <Box data-aos="zoom-out"
       height={{ xs: '100vh', lg: '100%', md: '100%', sm: '100%' }}
       display={'flex'}
       width={'100%'}

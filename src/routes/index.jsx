@@ -9,6 +9,8 @@ import Projects from "../componentes/codeEditor/projects/Projects";
 import Python from "../componentes/codeEditor/code/Python.";
 import Javascript from "../componentes/codeEditor/code/Javascript";
 import Web from "../componentes/codeEditor/code/Web";
+import Home from "../componentes/doc/Home";
+import Demo from "../componentes/Demo/Demo";
 const Router = createBrowserRouter([
 
   {
@@ -28,6 +30,10 @@ const Router = createBrowserRouter([
         element: <SingUp />
       }
     ]
+  },
+  {
+    path: '/demo',
+    element: <Demo></Demo>,
   },
   {
     path: '/home',
@@ -54,8 +60,8 @@ const Router = createBrowserRouter([
         element: <Projects />
       },
       {
-        path: 'ajustes',
-        element: <h1>Proyectos</h1>
+        path: 'doc',
+        element: <Home />
       }
     ]
   },

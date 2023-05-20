@@ -1,6 +1,12 @@
 import { Box, Typography } from "@mui/material"
 import generateUniqueId from "generate-unique-id"
+import Aos from 'aos'
+import { useEffect } from "react"
+import "aos/dist/aos.css"
 const Lenguajes = () => {
+  useEffect(() => {
+    Aos.init({ duration: 1000 })
+  }, [])
   const LENGUAJES =
     [
       {
@@ -39,13 +45,13 @@ const Lenguajes = () => {
     <Box id={'lenaguajes'} justifyContent={'center'} alignItems={'center'} flexDirection={'column'} display={'flex'} height={{ lg: '330px', md: '350px', sm: '420px', xs: '490px' }} bgcolor={'white'}>
 
       <Box textAlign={'center'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} paddingBottom={'15px'}>
-        <Typography color={'#111151'} fontSize={{ lg: '30px', sm: '25px', xs: '25px' }} paddingBottom={'10px'} sx={{ fontWeight: '700' }}>Ofrecemos soporte a diferentes lenguajes</Typography>
-        <Typography width={{ lg: '100%', xs: '90%' }} variant="body1" textAlign={'center'} color={'black'}>Empieza a programar con el lenguaje de programacion que mas te guste!</Typography>
+        <Typography data-aos="fade-right" color={'#111151'} fontSize={{ lg: '30px', sm: '25px', xs: '25px' }} paddingBottom={'10px'} sx={{ fontWeight: '700' }}>Ofrecemos soporte a diferentes lenguajes</Typography>
+        <Typography data-aos="fade-right" width={{ lg: '100%', xs: '90%' }} variant="body1" textAlign={'center'} color={'black'}>Empieza a programar con el lenguaje de programacion que mas te guste!</Typography>
 
 
       </Box>
 
-      <Box justifyContent={'center'} alignItems={'center'} flexWrap={'wrap'} display={'flex'} >
+      <Box data-aos="fade-up" justifyContent={'center'} alignItems={'center'} flexWrap={'wrap'} display={'flex'} >
 
         {LENGUAJES.map(({ id, title, img }) =>
           <Box boxShadow={'5px 5px 15px #fff2'} gap={'10px'} borderRadius={'10px'} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'} m={'10px'} width={'120px'} height={'120px'} key={id}>

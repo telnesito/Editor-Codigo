@@ -63,7 +63,7 @@ const Header = () => {
             <MenuIcon />
 
           </IconButton>
-          <Typography variant='h6' fontWeight={700} color={'#111151'} component={'div'} sx={{ flexGrow: 1 }}>CODESUE</Typography>
+          <Typography onClick={() => navigate('/')} variant='h6' fontWeight={700} color={'#111151'} component={'div'} sx={{ flexGrow: 1, cursor: 'pointer' }}>CODESUE</Typography>
           <Box width={'100%'} display={{ lg: 'flex', xs: 'none', md: 'flex' }} alignItems={'center'} justifyContent={'center'}>
             {ITEMS_MENU.map(({ id, item, to }) => <Button key={id} href={to}>{item}</Button>)}
 
