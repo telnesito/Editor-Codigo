@@ -6,6 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect } from "react"
 import "aos/dist/aos.css"
 import Aos from 'aos'
+import { auth } from '../../../../services/auth';
 
 const Login = () => {
 
@@ -14,9 +15,18 @@ const Login = () => {
   }, [])
 
   const navigate = useNavigate()
-  const handleFormSubmit = (values) => {
-    console.log(values)
-    navigate('/home/doc')
+  const handleFormSubmit = async ({ email, password }) => {
+
+    const response = await auth.iniciarSesion({ email, password })
+
+    console.error(email, password)
+    if (response.uid) {
+      console.log(response)
+      navigate('/home/doc')
+
+    } else {
+      console.error('Clave invalida')
+    }
 
   }
 

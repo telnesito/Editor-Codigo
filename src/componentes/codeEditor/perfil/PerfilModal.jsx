@@ -1,18 +1,39 @@
 import { Close } from "@mui/icons-material"
-import { Box, Button, IconButton, Modal, TextField, Tooltip, Typography } from "@mui/material"
+import { Alert, Box, Button, IconButton, Modal, Snackbar, TextField, Tooltip, Typography } from "@mui/material"
 import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import "aos/dist/aos.css"
 import Aos from 'aos'
+import { auth } from "../../../../services/auth"
 const PerfilModa = ({ closeModal, isOpen }) => {
   const navigate = useNavigate()
   const handleLogOut = () => {
     navigate('/')
   }
+  const [newPassowrd, setNewPassowrd] = useState('')
+  const [validValue, setValidValue] = useState('')
+  const [confirmUpdate, setConfirmUpdate] = useState(false)
 
   useEffect(() => {
     Aos.init({ duration: 500 })
   }, [])
+
+
+
+  const handleUpdatePassword = async () => {
+    if (newPassowrd === validValue) {
+
+      try {
+        const response = await auth.actualizarClave({ newPassowrd })
+        console.log(response)
+        setConfirmUpdate(true)
+      } catch (error) {
+        console.log(error)
+
+      }
+    }
+  }
+
 
   return (
     <Modal
@@ -43,9 +64,9 @@ const PerfilModa = ({ closeModal, isOpen }) => {
           <Box color={'black'} display={'flex'} alignItems={'left'} gap={'10px'} flexDirection={'column'} width={'100%'}>
             <Typography fontWeight={'500'} variant="body">Cambiar contraseña</Typography>
 
-            <TextField type="password" label={'New passowrd'} variant="standard" />
-            <TextField type="password" label={'Confirm new passowrd'} variant="standard" />
-            <Button variant="contained" color="secondary">Set Password</Button>
+            <TextField type="password" onChange={({ target }) => setNewPassowrd(target.value)} label={'New passowrd'} variant="standard" />
+            <TextField type="password" onChange={({ target }) => setValidValue(target.value)} label={'Confirm new passowrd'} variant="standard" />
+            <Button variant="contained" onClick={handleUpdatePassword} color="secondary">Set Password</Button>
           </Box>
 
           <Box gap={'5px'} display={'flex'} color={'black'} flexDirection={'column'}>
@@ -63,7 +84,14 @@ const PerfilModa = ({ closeModal, isOpen }) => {
         </Box>
 
 
+        <Snackbar onClose={() => setConfirmUpdate(false)} autoHideDuration={6000} open={confirmUpdate}>
+          <Alert severity="success">
+            <Typography>Clave actualizada correctamente</Typography>
+          </Alert>
+
+        </Snackbar>
       </Box>
+
 
     </Modal>
   )

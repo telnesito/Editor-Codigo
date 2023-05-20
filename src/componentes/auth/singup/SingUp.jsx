@@ -1,6 +1,6 @@
 import "../login/Login.css"
 
-import { Box, Button, FormControl, Snackbar, InputLabel, IconButton, MenuItem, Modal, Select, TextField, Typography, Alert } from "@mui/material"
+import { Box, Button, Snackbar, IconButton, TextField, Typography, Alert } from "@mui/material"
 import { useFormik } from "formik"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -9,37 +9,39 @@ import { useState } from "react";
 import { useEffect } from "react"
 import "aos/dist/aos.css"
 import Aos from 'aos'
+import { auth } from "../../../../services/auth";
 const SingUp = () => {
   useEffect(() => {
     Aos.init({ duration: 500 })
   }, [])
 
-  const [open, setOpen] = useState(false)
   const [snackbar, setSnackbar] = useState(false)
   const navigate = useNavigate()
-  const handleModal = (action) => setOpen(action)
   const handleSnackbar = (action) => setSnackbar(action)
 
 
-  const handleFormSubmit = ({ email, confirmEmail, username, securityQuestion, securityAnswer }) => {
+  const handleFormSubmit = async ({ email, confirmEmail, password }) => {
     if (email === confirmEmail) {
-      handleModal(true)
-      console.log({ email, confirmEmail, username, securityQuestion, securityAnswer })
+
+      try {
+        const newUser = await auth.crearCuenta({ email, password })
+        if (newUser.uid) {
+          console.log(newUser)
+          handleSnackbar(true)
+          setTimeout(() => {
+            navigate('/home/doc')
+          }, 5000);
+          console.log({ email, confirmEmail, password })
+        }
+
+      } catch (error) {
+        console.log(error)
+
+      }
+
+
     } else {
       console.log('Verifique email')
-    }
-  }
-
-  const handleSubmitValidation = ({ codeVerification }) => {
-    try {
-
-      if (codeVerification === '12345') {
-        handleModal(false)
-        handleSnackbar(true)
-      }
-      console.log('Enviado correctamente', codeVerification)
-    } catch (error) {
-      console.log(error)
     }
   }
 
@@ -56,17 +58,9 @@ const SingUp = () => {
     onSubmit: handleFormSubmit
   })
 
-  const validationFormik = useFormik(
-    {
-      initialValues: {
-        codeVerification: ''
-      },
-      onSubmit: handleSubmitValidation
 
-    }
-  )
   // Destructuramos el obj formik
-  const { username, email, confirmEmail, password, securityQuestion, securityAnswer, handleChange } = formik
+  const { email, confirmEmail, password, handleChange } = formik
 
 
   return (
@@ -97,17 +91,7 @@ const SingUp = () => {
           <Typography fontSize={'25px'} fontWeight={700} color={'#415A77'}>Create an account</Typography>
           <Typography color={'gray'}>Sign up now and unlock exclusive tools!</Typography>
         </Box>
-        <TextField
-          fullWidth
-          label='Username'
-          name="username"
-          id="username"
-          type="text"
-          variant="filled"
-          value={username}
-          onChange={handleChange}
-          required
-        />
+
         <TextField
           fullWidth
           label='Email'
@@ -144,36 +128,7 @@ const SingUp = () => {
           required
         />
 
-        <FormControl fullWidth>
-          <InputLabel id={'select-question'} >Security question</InputLabel>
-          <Select
-            defaultValue={""}
-            labelId="select-question"
-            label="Security question"
-            required
-            onChange={handleChange}
-            value={securityQuestion}
-            name="securityQuestion"
-            id="securityQuestion"
 
-          >
-            <MenuItem value={'Fecha de nacimiento de tu hermano mayor'}>Fecha de nacimiento de tu hermano mayor</MenuItem>
-            <MenuItem value={"Comida favorita"}>Comida favorita</MenuItem>
-            <MenuItem value={"Correo electronico de recuperacion"} >Correo electronico de recuperacion</MenuItem>
-          </Select>
-        </FormControl>
-
-        <TextField
-
-          required
-          fullWidth
-          id="securityAnswer"
-          label="Security answer"
-          name="securityAnswer"
-          variant="filled"
-          value={securityAnswer}
-          onChange={handleChange}
-          type="text" />
 
 
         <Button sx={{ height: '50px', fontWeight: '700' }} variant='contained' type='submit'>Create account</Button>
@@ -184,50 +139,7 @@ const SingUp = () => {
 
       </Box>
       {/* Modal de verificacion de correo */}
-      <Modal
-        open={open}
-        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-      >
-        <Box
-          width={{ lg: '500px', xs: '300px', md: '500px' }}
-          padding={'20px'}
-          height={'250px'}
-          bgcolor={'white'}
-          color={'black'}
-          borderRadius={'10px'}
-          boxShadow={'5px 5px 15px #00000080'}
 
-          sx={{ gap: '20px', flexDirection: 'column', display: 'flex', alignItems: 'left', justifyContent: 'center' }}
-        >
-          <Box width={'90%'}>
-            <Typography fontWeight={700} color={'#111151'} fontSize={'25px'}>Email Validation</Typography>
-            <Typography>Por favor, vaya a su correo electronico e introduzca el codigo de verificacion de 5 digitos</Typography>
-          </Box>
-
-          <form onSubmit={validationFormik.handleSubmit}>
-            <TextField
-              fullWidth
-              label={'Codigo de verificacion'}
-              type="text"
-              variant="outlined"
-              onChange={validationFormik.handleChange}
-              value={validationFormik.codeVerification}
-              name="codeVerification"
-              id="codeVerification"
-              required
-            />
-            <Box
-              display={'flex'}
-              gap={'10px'}
-              mt={'10px'}
-            >
-              <Button type="submit" variant="contained">Enviar</Button>
-              <Button onClick={() => handleModal(false)} variant="outlined">Cambiar correo</Button>
-            </Box>
-          </form>
-
-        </Box>
-      </Modal>
 
       {/* Snackbar de verificacion de registro */}
 
