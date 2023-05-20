@@ -7,9 +7,7 @@ import Aos from 'aos'
 import { auth } from "../../../../services/auth"
 const PerfilModa = ({ closeModal, isOpen }) => {
   const navigate = useNavigate()
-  const handleLogOut = () => {
-    navigate('/')
-  }
+
   const [newPassowrd, setNewPassowrd] = useState('')
   const [validValue, setValidValue] = useState('')
   const [confirmUpdate, setConfirmUpdate] = useState(false)
@@ -27,6 +25,20 @@ const PerfilModa = ({ closeModal, isOpen }) => {
     cargarPerfil()
 
   }, [])
+
+  const handleLogOut = async () => {
+    try {
+      const response = await auth.cerrarSesion()
+
+      if (response) {
+        navigate('/')
+      }
+
+    } catch (error) {
+      console.log(error)
+
+    }
+  }
 
   const handleDeleteUser = async () => {
     try {
