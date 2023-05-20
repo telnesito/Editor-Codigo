@@ -13,9 +13,18 @@ const PerfilModa = ({ closeModal, isOpen }) => {
   const [newPassowrd, setNewPassowrd] = useState('')
   const [validValue, setValidValue] = useState('')
   const [confirmUpdate, setConfirmUpdate] = useState(false)
+  const [correo, setCorreo] = useState('')
 
   useEffect(() => {
     Aos.init({ duration: 500 })
+
+    const cargarPerfil = async () => {
+      const { email, uid } = await auth.getProfile()
+      setCorreo(email)
+    }
+
+    cargarPerfil()
+
   }, [])
 
 
@@ -54,9 +63,9 @@ const PerfilModa = ({ closeModal, isOpen }) => {
           <Box gap={'5px'} color={'black'} display={'flex'} flexDirection={'column'}>
             <Typography fontWeight={'500'} variant="body">Nombre de usuario</Typography>
 
-            <Typography variant="body2">Telnesito</Typography>
+            <Typography variant="body2">Anonimo</Typography>
             <Typography fontWeight={'500'} variant="body">Direccion de correo</Typography>
-            <Typography variant="boydy2">carlosternera46@gmail.com</Typography>
+            <Typography variant="boydy2">{correo}</Typography>
 
 
           </Box>
