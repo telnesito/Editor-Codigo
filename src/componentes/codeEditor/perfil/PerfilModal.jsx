@@ -1,5 +1,5 @@
 import { Close } from "@mui/icons-material"
-import { Alert, Box, Button, IconButton, Modal, Snackbar, TextField, Tooltip, Typography } from "@mui/material"
+import { Alert, AlertTitle, Box, Button, IconButton, Modal, Snackbar, TextField, Tooltip, Typography } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import "aos/dist/aos.css"
@@ -14,6 +14,7 @@ const PerfilModa = ({ closeModal, isOpen }) => {
   const [validValue, setValidValue] = useState('')
   const [confirmUpdate, setConfirmUpdate] = useState(false)
   const [correo, setCorreo] = useState('')
+  const [modalState, setModalState] = useState(false)
 
   useEffect(() => {
     Aos.init({ duration: 500 })
@@ -27,7 +28,16 @@ const PerfilModa = ({ closeModal, isOpen }) => {
 
   }, [])
 
-
+  const handleDeleteUser = async () => {
+    try {
+      const response = await auth.deleteUser()
+      if (response) {
+        navigate('/')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleUpdatePassword = async () => {
     if (newPassowrd === validValue) {
@@ -82,7 +92,9 @@ const PerfilModa = ({ closeModal, isOpen }) => {
             <Typography fontWeight={'500'} variant="body">Eliminar cuenta</Typography>
             <Typography variant="body2">Borrar toda la informacion de la cuenta, incluyendo proyectos y cualquier configuracion</Typography>
 
-            <Button onClick={() => alert('Cuenta borrada')} variant="contained" color="error">Borrar cuenta</Button>
+            <Button onClick={() => {
+              setModalState(true)
+            }} variant="contained" color="error">Borrar cuenta</Button>
           </Box>
           <Box gap={'5px'} display={'flex'} color={'black'} flexDirection={'column'}>
             <Typography fontWeight={'500'} variant="body">Cerrar sesion</Typography>
@@ -97,9 +109,26 @@ const PerfilModa = ({ closeModal, isOpen }) => {
           <Alert severity="success">
             <Typography>Clave actualizada correctamente</Typography>
           </Alert>
-
         </Snackbar>
+
+
+        {modalState && <Modal sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} open={modalState} onClose={() => setModalState(false)}>
+          <Box data-aos="zoom-in" width={'50%'} gap={'10px'} flexDirection={'column'} display={'flex'} alignItems={'center'} justifyContent={'center'} height={'200px'} borderRadius={'10px'} bgcolor={'white'}>
+            <Alert sx={{ width: '85%' }} severity="error">
+              <AlertTitle>Esta seguro que desea elimiinar la cuenta?</AlertTitle>
+              <Typography variant="body">Esta accion no tiene vuelta atras y se perdera todos los registros relacionados a la cuenta</Typography>
+            </Alert>
+            <Box display={'flex'} gap={'10px'}>
+              <Button onClick={handleDeleteUser} variant="contained" color="error">Borrar</Button>
+              <Button onClick={() => setModalState(false)} variant="outlined" color="success">Mantener cuenta</Button>
+            </Box>
+
+          </Box>
+        </Modal>}
+
+
       </Box>
+
 
 
     </Modal>
