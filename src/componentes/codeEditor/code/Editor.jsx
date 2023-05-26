@@ -2,9 +2,8 @@ import { Box, IconButton, Input, Tooltip, Typography } from "@mui/material"
 import { Editor as CodeEditor } from "@monaco-editor/react"
 import Loading from "./Loading"
 import { ContextCode } from "../../../hooks/context/CodeContext"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { Download, Help, PlayArrow, Save, Upload } from "@mui/icons-material"
-import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
 import { exportFile } from "../share/exportFile"
 import useModal from "../../../hooks/state/useModal"
 import GuardarArchivo from "../GuardarArchivo/GuardarArchivo"
@@ -14,6 +13,10 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
 
   let codigo = ''
   const { closeModal, isOpen, openModal } = useModal()
+  useEffect(() => {
+    openModal()
+
+  }, [])
 
 
   const autoCompile = (value) => {
@@ -104,7 +107,7 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
             </IconButton>
           </Tooltip>
           <Tooltip title={'Guardar'}>
-            <IconButton onClick={openModal} size="large">
+            <IconButton size="large">
               <Save />
             </IconButton>
           </Tooltip>
@@ -127,7 +130,7 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
         </Box>
       </Box>}
 
-      {isOpen && <GuardarArchivo isOpen={isOpen} closeModal={closeModal} lenguaje={lenguaje} />}
+      <GuardarArchivo isOpen={isOpen} closeModal={closeModal} lenguaje={lenguaje} />
     </Box>
   )
 }

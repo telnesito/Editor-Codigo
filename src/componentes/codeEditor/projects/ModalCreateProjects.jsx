@@ -13,9 +13,11 @@ const ModalCreateProjects = ({ isOpen, closeModal }) => {
     Aos.init({ duration: 500 })
   }, [])
 
+
   const navigate = useNavigate()
   const { Code, setCode } = useContext(ContextCode)
   const handleRuby = () => {
+
     navigate('/home/ruby')
     setCode('')
   }
@@ -111,6 +113,7 @@ const ModalCreateProjects = ({ isOpen, closeModal }) => {
             </Card>)
           }
         </Box>
+
 
 
       </Paper>
