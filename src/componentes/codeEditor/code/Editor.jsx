@@ -130,7 +130,6 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
         </Box>
       </Box>}
 
-      <GuardarArchivo isOpen={isOpen} closeModal={closeModal} lenguaje={lenguaje} />
     </Box>
   )
 }

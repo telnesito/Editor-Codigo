@@ -5,49 +5,43 @@ import ImportExportIcon from '@mui/icons-material/ImportExport';
 import ArticleIcon from '@mui/icons-material/Article';
 import LanguageIcon from '@mui/icons-material/Language';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import generateUniqueId from "generate-unique-id";
 import useModal from "../../../hooks/state/useModal";
 import ModalCreateProjects from "./ModalCreateProjects";
+import { projects } from "../../../../services/projects";
+import { useState, useEffect, useContext } from 'react'
+import { useNavigate } from "react-router-dom";
+import { ContextCode } from "../../../hooks/context/CodeContext";
+
 const Projects = () => {
-  const date = new Date
+
+  const [listProjects, setListProjects] = useState([]);
+  const navigate = useNavigate()
+  const { Code, setCode } = useContext(ContextCode)
+
+  useEffect(() => {
+    const traerProyectos = async () => {
+      try {
+        const response = await projects.getProjects();
+        setListProjects(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    traerProyectos();
+  }, []);
+
+  useEffect(() => {
+    console.log(listProjects);
+  }, [listProjects]);
+
+
   const { isOpen, openModal, closeModal } = useModal()
-  const PROYECTOS = [
-    {
-      nombre: 'Hola mundo',
-      fecha: date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear(),
-      lenguaje: 'Python',
-      id: generateUniqueId()
-    },
 
-    {
-      nombre: 'Busqueda secuencial',
-      fecha: date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear(),
-      lenguaje: 'C++',
-      id: generateUniqueId()
-    },
-
-    {
-      nombre: 'Algoritmo de ordanmiento',
-      fecha: date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear(),
-      lenguaje: 'Java',
-      id: generateUniqueId()
-    },
-
-    {
-      nombre: 'Probando funciones',
-      fecha: date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear(),
-      lenguaje: 'Ruby',
-      id: generateUniqueId()
-    },
-
-    {
-      nombre: 'Chao mundo',
-      fecha: date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear(),
-      lenguaje: 'Ruby',
-      id: generateUniqueId()
-    },
-  ]
-
+  const handleOpenProject = (to, code) => {
+    navigate(`/home/${to.toLowerCase()}`)
+    setCode(code)
+  }
 
   return (
     <Box gap={'10px'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} height={'100%'} width={'100%'} bgcolor={'#e1e1e1'}>
@@ -60,7 +54,7 @@ const Projects = () => {
             <Box justifyContent={'space-around'} display={'flex'} flexDirection={'column'} width={'40%'}>
               <Typography color={'#007ACC'} variant="h4">Administra tus proyectos</Typography>
               <Typography width={'90%'}>En nuestra version alpha, disfruta de la posibilidad de crear hasta 10 proyectos por cuenta!</Typography>
-              <Button sx={{ width: '80%', height: '50px' }} onClick={openModal} variant="outlined">Iniciar un nuevo proyecto</Button>
+              <Button sx={{ width: '80%', height: '50px' }} onClick={openModal} variant="contained">Iniciar un nuevo proyecto</Button>
             </Box>
 
             <Box color={'gray'} alignItems={'center'} width={'60%'} display={'flex'} gap={'30px'}>
@@ -119,13 +113,13 @@ const Projects = () => {
                 </TableRow>
               </TableHead>
               <TableBody >
-                {PROYECTOS.map(({ id, fecha, nombre, lenguaje }) => <TableRow key={id}>
+                {listProjects.length > 0 ? listProjects.map(({ fecha, nombre, lenguaje, contenido }, index) => <TableRow key={index}>
                   <TableCell>{nombre}</TableCell>
                   <TableCell>{fecha}</TableCell>
                   <TableCell>{lenguaje}</TableCell>
                   <TableCell>
                     <Box display={'flex'} gap={'10px'}>
-                      <Button variant="contained" color="success">Abrir</Button>
+                      <Button variant="contained" onClick={() => handleOpenProject(lenguaje, contenido)} color="success">Abrir</Button>
                       <Button variant="contained" color="error">Eliminar</Button>
                     </Box>
 
@@ -133,7 +127,12 @@ const Projects = () => {
                   </TableCell>
 
 
-                </TableRow>)}
+                </TableRow>) : <TableRow>
+                  <TableCell>No tienes proyectos creados todavia</TableCell>
+                  <TableCell>n/a</TableCell>
+                  <TableCell>n/a</TableCell>
+                  <TableCell>n/a</TableCell>
+                </TableRow>}
               </TableBody>
             </Table>
           </Box>
