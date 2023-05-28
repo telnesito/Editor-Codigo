@@ -11,6 +11,7 @@ import { projects } from "../../../../services/projects";
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { ContextCode } from "../../../hooks/context/CodeContext";
+import { ContextIdProject } from "../../../hooks/context/IdProjectContext";
 
 
 const Projects = () => {
@@ -18,6 +19,7 @@ const Projects = () => {
   const [listProjects, setListProjects] = useState([]);
   const navigate = useNavigate()
   const { Code, setCode } = useContext(ContextCode)
+  const { idProject, setIdProject } = useContext(ContextIdProject)
 
   useEffect(() => {
     const traerProyectos = async () => {
@@ -39,9 +41,11 @@ const Projects = () => {
 
   const { isOpen, openModal, closeModal } = useModal()
 
-  const handleOpenProject = (to, code) => {
-    navigate(`/home/${to.toLowerCase()}`)
+  const handleOpenProject = (to, code, id) => {
     setCode(code)
+    setIdProject(id)
+    navigate(`/home/${to.toLowerCase()}`)
+
   }
 
   const handleDeleteProject = async (idProject) => {
@@ -136,7 +140,7 @@ const Projects = () => {
 
                   <TableCell>
                     <Box display={'flex'} gap={'10px'}>
-                      <Button variant="contained" onClick={() => handleOpenProject(lenguaje, contenido)} color="success">Abrir</Button>
+                      <Button variant="contained" onClick={() => handleOpenProject(lenguaje, contenido, id)} color="success">Abrir</Button>
                       <Button variant="contained" onClick={() => handleDeleteProject(id)} color="error">Eliminar</Button>
                     </Box>
 

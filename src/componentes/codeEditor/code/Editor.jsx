@@ -6,10 +6,12 @@ import { useContext, useEffect } from "react"
 import { Download, Help, PlayArrow, Save, Upload } from "@mui/icons-material"
 import { exportFile } from "../share/exportFile"
 import useModal from "../../../hooks/state/useModal"
-import GuardarArchivo from "../GuardarArchivo/GuardarArchivo"
+import { ContextIdProject } from "../../../hooks/context/IdProjectContext"
+import { projects } from "../../../../services/projects"
 const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
 
   const { Code, setCode } = useContext(ContextCode)
+  const { idProject, setIdProject } = useContext(ContextIdProject)
 
   let codigo = ''
   const { closeModal, isOpen, openModal } = useModal()
@@ -47,6 +49,21 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
     lineNumbers: "on", // Mostrar número de línea
     wordWrap: "on", // Envoltura automática de líneas
   };
+
+  const handleUpdateProject = async () => {
+    const lastUpdate = new Date()
+    try {
+
+      const response = await projects.updateProject({
+        idProject,
+        contenido: Code,
+        ultimoCambio: `${lastUpdate.toLocaleDateString()}`
+      })
+      console.error(response)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
 
   return (
@@ -107,7 +124,7 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
             </IconButton>
           </Tooltip>
           <Tooltip title={'Guardar'}>
-            <IconButton size="large">
+            <IconButton onClick={handleUpdateProject} size="large">
               <Save />
             </IconButton>
           </Tooltip>
