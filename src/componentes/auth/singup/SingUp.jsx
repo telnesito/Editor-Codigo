@@ -16,6 +16,8 @@ const SingUp = () => {
   }, [])
 
   const [snackbar, setSnackbar] = useState(false)
+  const [errSnack, setErrSnack] = useState(false)
+
   const navigate = useNavigate()
   const handleSnackbar = (action) => setSnackbar(action)
 
@@ -32,10 +34,12 @@ const SingUp = () => {
             navigate('/home/doc')
           }, 5000);
           console.log({ email, confirmEmail, password })
+        } else {
+          setErrSnack(true)
         }
 
       } catch (error) {
-        console.log(error)
+        console.error('peque;a')
 
       }
 
@@ -154,7 +158,18 @@ const SingUp = () => {
 
       </Snackbar>
 
-    </Box >
+
+      <Snackbar
+        Snackbar
+        open={errSnack}
+        onClose={() => setErrSnack(false)}
+
+      >
+        <Alert elevation={3} variant="filled" severity="error">Por favor verificar que el correo electronico sea igual y que la clave sea mayor a 5 digitos!</Alert>
+
+      </Snackbar>
+
+    </Box>
   )
 }
 
