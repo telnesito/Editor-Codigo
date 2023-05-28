@@ -1,4 +1,4 @@
-const URL = 'http://localhost:8000/proyectos'
+const URL = 'https://codesue-db.onrender.com'
 
 const getProjects = async () => {
   try {
