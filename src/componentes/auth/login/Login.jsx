@@ -1,9 +1,9 @@
-import { Box, Button, Typography, TextField, IconButton } from '@mui/material';
+import { Box, Button, Typography, TextField, IconButton, Snackbar, Alert } from '@mui/material';
 import { useFormik } from 'formik';
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import "aos/dist/aos.css"
 import Aos from 'aos'
 import { auth } from '../../../../services/auth';
@@ -15,6 +15,7 @@ const Login = () => {
   }, [])
 
   const navigate = useNavigate()
+  const [passError, setPassError] = useState(false)
   const handleFormSubmit = async ({ email, password }) => {
 
     const response = await auth.iniciarSesion({ email, password })
@@ -25,7 +26,7 @@ const Login = () => {
       navigate('/home/doc')
 
     } else {
-      console.error('Clave invalida')
+      setPassError(true)
     }
 
   }
@@ -74,6 +75,7 @@ const Login = () => {
             id='email'
             type='email'
             variant='filled'
+            required
             value={formik.values.email}
             onChange={formik.handleChange}
 
@@ -81,6 +83,8 @@ const Login = () => {
 
           <TextField
             label='Password'
+            required
+
             name='password'
             id='password'
             type='password'
@@ -100,6 +104,11 @@ const Login = () => {
         <Typography sx={{ cursor: 'pointer' }} onClick={() => navigate('/authenticator/singup')} fontWeight={700} color={'#415A77'}>Register!</Typography>
 
       </Box>
+      <Snackbar open={passError} onClose={() => setPassError(false)}>
+        <Alert severity='error'>
+          Correo electronico o clave erroneo, por favor verficar e intentar de nuevo
+        </Alert>
+      </Snackbar>
     </Box>
   )
 }

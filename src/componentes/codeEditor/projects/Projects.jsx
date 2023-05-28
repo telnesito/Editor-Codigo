@@ -113,7 +113,6 @@ const Projects = () => {
         <Paper sx={{ padding: '15px', overflowY: 'scroll', height: '100%', }}>
           <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} width={'100%'}>
             <Typography color={'#007ACC'} variant="h4">Proyectos</Typography>
-            <TextField sx={{ width: '20%' }} variant="standard" label={'Busqueda rapida'} type="text"></TextField>
           </Box>
 
 

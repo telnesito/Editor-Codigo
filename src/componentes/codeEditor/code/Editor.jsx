@@ -1,24 +1,26 @@
-import { Box, IconButton, Input, Tooltip, Typography } from "@mui/material"
+import { Alert, Box, IconButton, Input, Snackbar, Tooltip, Typography } from "@mui/material"
 import { Editor as CodeEditor } from "@monaco-editor/react"
 import Loading from "./Loading"
 import { ContextCode } from "../../../hooks/context/CodeContext"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Download, Help, PlayArrow, Save, Upload } from "@mui/icons-material"
 import { exportFile } from "../share/exportFile"
-import useModal from "../../../hooks/state/useModal"
 import { ContextIdProject } from "../../../hooks/context/IdProjectContext"
+import { useNavigate } from "react-router-dom"
 import { projects } from "../../../../services/projects"
 const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
 
   const { Code, setCode } = useContext(ContextCode)
   const { idProject, setIdProject } = useContext(ContextIdProject)
+  const navigate = useNavigate()
+  const [openSnackBar, setOpenSnackBar] = useState(false)
 
   let codigo = ''
-  const { closeModal, isOpen, openModal } = useModal()
   useEffect(() => {
-    openModal()
-
-  }, [])
+    if (idProject === '') {
+      navigate('/home/proyectos')
+    }
+  }, [idProject])
 
 
   const autoCompile = (value) => {
@@ -35,11 +37,10 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
   }
 
   const importFile = async (event) => {
-    const archivo = event.target.files[0]
+    let archivo = event.target.files[0]
     try {
       let contenido = await archivo.text()
       setCode(contenido)
-
 
     } catch (error) {
       console.error('Error al leer el archivo:', error);
@@ -52,6 +53,7 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
 
   const handleUpdateProject = async () => {
     const lastUpdate = new Date()
+    setOpenSnackBar(true)
     try {
 
       const response = await projects.updateProject({
@@ -146,6 +148,12 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
 
         </Box>
       </Box>}
+
+      <Snackbar onClose={() => setOpenSnackBar(false)} open={openSnackBar}>
+        <Alert severity="success">
+          Codigo guardado correctamente
+        </Alert>
+      </Snackbar>
 
     </Box>
   )

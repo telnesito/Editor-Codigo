@@ -1,8 +1,8 @@
-const urlLogin = 'http://localhost:8000/usuarios/login'
+const URL = 'http://localhost:8000/usuarios'
 
 const iniciarSesion = async (data = {}) => {
   try {
-    const response = await fetch(urlLogin, {
+    const response = await fetch(`${URL}/login`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -22,14 +22,11 @@ const iniciarSesion = async (data = {}) => {
     console.log(error)
   }
 }
-
-const urlSignUp = 'http://localhost:8000/usuarios/create-account'
-
 
 const crearCuenta = async (data = {}) => {
   try {
 
-    const response = await fetch(urlSignUp, {
+    const response = await fetch(`${URL}/create-account`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -49,11 +46,10 @@ const crearCuenta = async (data = {}) => {
 
   }
 }
-const urlUpdatePassword = 'http://localhost:8000/usuarios/update-password'
 
 const actualizarClave = async (data = {}) => {
   try {
-    const response = await fetch(urlUpdatePassword, {
+    const response = await fetch(`${URL}/update-password`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -74,11 +70,10 @@ const actualizarClave = async (data = {}) => {
   }
 }
 
-const urlGetProfile = 'http://localhost:8000/usuarios/get-profile'
 
 const getProfile = async () => {
   try {
-    const response = await fetch(urlGetProfile, {
+    const response = await fetch(`${URL}/get-profile`, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -98,11 +93,10 @@ const getProfile = async () => {
   }
 }
 
-const urlDeleteUser = 'http://localhost:8000/usuarios/delete-user'
 
 const deleteUser = async () => {
   try {
-    const response = await fetch(urlDeleteUser, {
+    const response = await fetch(`${URL}/delete-user`, {
       method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -122,12 +116,11 @@ const deleteUser = async () => {
   }
 }
 
-const urlCerrarSesion = 'http://localhost:8000/usuarios/logout'
 
 
 const cerrarSesion = async () => {
   try {
-    const response = await fetch(urlCerrarSesion, {
+    const response = await fetch(`${URL}/logout`, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
