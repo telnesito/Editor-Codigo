@@ -12,6 +12,7 @@ import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { ContextCode } from "../../../hooks/context/CodeContext";
 
+
 const Projects = () => {
 
   const [listProjects, setListProjects] = useState([]);
@@ -43,6 +44,18 @@ const Projects = () => {
     setCode(code)
   }
 
+  const handleDeleteProject = async (idProject) => {
+
+    try {
+      const response = await projects.deleteProject({ idProject })
+      setListProjects(() => listProjects.filter((project) => project.id !== idProject))
+      console.error(response)
+    } catch (error) {
+      console.error(error)
+
+    }
+
+  }
   return (
     <Box gap={'10px'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} height={'100%'} width={'100%'} bgcolor={'#e1e1e1'}>
 
@@ -105,22 +118,26 @@ const Projects = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>Nombre del proyecto</TableCell>
-                  <TableCell>Fecha de creacion</TableCell>
-
                   <TableCell>Lenguaje</TableCell>
+                  <TableCell>Fecha de creacion</TableCell>
+                  <TableCell>Ultimo cambio</TableCell>
+
+
                   <TableCell>Accion</TableCell>
 
                 </TableRow>
               </TableHead>
               <TableBody >
-                {listProjects.length > 0 ? listProjects.map(({ fecha, nombre, lenguaje, contenido }, index) => <TableRow key={index}>
+                {listProjects.length > 0 ? listProjects.map(({ fecha, nombre, lenguaje, contenido, ultimoCambio, id }, index) => <TableRow key={index}>
                   <TableCell>{nombre}</TableCell>
-                  <TableCell>{fecha}</TableCell>
                   <TableCell>{lenguaje}</TableCell>
+                  <TableCell>{fecha}</TableCell>
+                  <TableCell>{ultimoCambio}</TableCell>
+
                   <TableCell>
                     <Box display={'flex'} gap={'10px'}>
                       <Button variant="contained" onClick={() => handleOpenProject(lenguaje, contenido)} color="success">Abrir</Button>
-                      <Button variant="contained" color="error">Eliminar</Button>
+                      <Button variant="contained" onClick={() => handleDeleteProject(id)} color="error">Eliminar</Button>
                     </Box>
 
 
@@ -132,6 +149,8 @@ const Projects = () => {
                   <TableCell>n/a</TableCell>
                   <TableCell>n/a</TableCell>
                   <TableCell>n/a</TableCell>
+                  <TableCell>n/a</TableCell>
+
                 </TableRow>}
               </TableBody>
             </Table>

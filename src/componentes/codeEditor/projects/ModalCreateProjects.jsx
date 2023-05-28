@@ -81,13 +81,14 @@ const ModalCreateProjects = ({ isOpen, closeModal }) => {
       // If todo bien... se crea y navega al editor
       if (value) {
 
-        await projects.createProjects({
+        const response = await projects.createProjects({
           nombre: value,
           contenido: '',
           lenguaje: to,
-          fecha: `${currentDate.toLocaleDateString()}`
+          fecha: `${currentDate.toLocaleDateString()}`,
+          ultimoCambio: `${currentDate.toLocaleDateString()}`
         })
-
+        console.error(response)
         navigate(`/home/${to.toLowerCase()}`)
         setCode('')
       }
