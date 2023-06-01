@@ -9,7 +9,9 @@ import { useState } from "react";
 import { useEffect } from "react"
 import "aos/dist/aos.css"
 import Aos from 'aos'
+import { sendEmailVerification } from "../../../functions/sendEmailVarification";
 import { auth } from "../../../../services/auth";
+
 const SingUp = () => {
   useEffect(() => {
     Aos.init({ duration: 500 })
@@ -28,12 +30,11 @@ const SingUp = () => {
       try {
         const newUser = await auth.crearCuenta({ email, password })
         if (newUser.uid) {
-          console.log(newUser)
           handleSnackbar(true)
+          sendEmailVerification()
           setTimeout(() => {
-            navigate('/home/doc')
-          }, 5000);
-          console.log({ email, confirmEmail, password })
+            navigate('/authenticator/login')
+          }, 3000);
         } else {
           setErrSnack(true)
         }
@@ -48,6 +49,7 @@ const SingUp = () => {
       console.log('Verifique email')
     }
   }
+
 
   //Objetos formik
   const formik = useFormik({
@@ -151,10 +153,9 @@ const SingUp = () => {
         open={snackbar}
         autoHideDuration={6000}
         onClose={() => handleSnackbar(false)}
-        sx={{ width: '250px' }}
 
       >
-        <Alert elevation={3} variant="filled" sx={{ width: "100%" }} severity="success">Registro exitoso!</Alert>
+        <Alert elevation={3} variant="filled" severity="success">Registro exitoso!, se redireccionara al inicio de sesion</Alert>
 
       </Snackbar>
 

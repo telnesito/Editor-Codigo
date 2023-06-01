@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from "@mui/material"
+import { Box, Modal, Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from "@mui/material"
 import CodeIcon from '@mui/icons-material/Code';
 import StorageIcon from '@mui/icons-material/Storage';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
@@ -164,6 +164,8 @@ const Projects = () => {
       </Box>
 
       {isOpen && <ModalCreateProjects isOpen={isOpen} closeModal={closeModal} />}
+
+
 
     </Box>
   )

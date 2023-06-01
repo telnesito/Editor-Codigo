@@ -19,6 +19,9 @@ const CodeEditor = () => {
             <Box display={'flex'} width={'95%'} flexDirection={'column'}>
 
               <Outlet />
+
+
+
             </Box>
 
 

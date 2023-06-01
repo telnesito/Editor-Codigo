@@ -1,4 +1,4 @@
-import { Box, Button, Typography, TextField, IconButton, Snackbar, Alert } from '@mui/material';
+import { Box, Button, Typography, Paper, TextField, IconButton, Snackbar, Alert, Modal } from '@mui/material';
 import { useFormik } from 'formik';
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import "aos/dist/aos.css"
 import Aos from 'aos'
 import { auth } from '../../../../services/auth';
+import { sendEmailVerification } from '../../../functions/sendEmailVarification';
 
 const Login = () => {
 
@@ -16,17 +17,30 @@ const Login = () => {
 
   const navigate = useNavigate()
   const [passError, setPassError] = useState(false)
+  const [VerifEmailError, setVerifEmailError] = useState(false)
+  const [disableBtn, setDisableBtn] = useState(false)
+  const [countBtn, setCountBtn] = useState(0)
+  const [validError, setValidError] = useState({
+    code: '', message: ''
+  })
   const handleFormSubmit = async ({ email, password }) => {
 
     const response = await auth.iniciarSesion({ email, password })
 
     console.error(email, password)
     if (response.uid) {
-      console.log(response)
-      navigate('/home/doc')
-
+      validarEmail(response)
     } else {
       setPassError(true)
+    }
+
+  }
+
+  const validarEmail = (user) => {
+    if (user.emailVerified) {
+      navigate('/home/doc')
+    } else {
+      setVerifEmailError(true)
     }
 
   }
@@ -38,6 +52,31 @@ const Login = () => {
     },
     onSubmit: handleFormSubmit
   })
+
+
+  const handleSendEmailVerification = async () => {
+    setDisableBtn(true)
+    setCountBtn(10)
+
+    const interval = setInterval(() => {
+      setCountBtn((prevCount) => prevCount - 1);
+    }, 1000);
+
+    const responseAPI = await sendEmailVerification()
+    setValidError(responseAPI)
+
+
+
+    try {
+      setTimeout(() => {
+        clearInterval(interval)
+        setDisableBtn(false)
+      }, 10000);
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
 
   return (
 
@@ -109,6 +148,41 @@ const Login = () => {
           Correo electronico o clave erroneo, por favor verficar e intentar de nuevo
         </Alert>
       </Snackbar>
+
+      <Modal
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        open={VerifEmailError} onClose={() => setVerifEmailError(false)}>
+        <Paper data-aos="fade-left"
+          sx={{
+            height: 'auto',
+            width: '700px',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <Box bgcolor={'#007ACC'} color={'white'}>
+            <Typography ml={'10px'} textAlign={'left'} variant='body1'>Verifica el correo electronico</Typography>
+          </Box>
+          <Alert severity='warning'>
+            Su cuenta esta registrada correctamente, sin embargo es necesario que valide el correo electronico. Revisar su bandeja o de spam para terminar su registro
+          </Alert>
+          <Alert severity='error'>
+            <Box display={'flex'} flexDirection={'column'} gap={'10px'}>
+              <Typography>Email de verficacion vencido o no recibido?</Typography>
+              <Button disabled={disableBtn}
+                onClick={handleSendEmailVerification}
+                sx={{ width: '150px' }} color='error' size='small' variant='contained'>
+                {countBtn === 0 ? 'Re-enviar' : countBtn}
+              </Button>
+            </Box>
+          </Alert>
+          {validError.message !== "" ? <Alert severity={validError.code === 0 ? 'success' : 'error'}>
+            <Typography>
+              {validError.message}
+            </Typography>
+          </Alert> : "  "}
+        </Paper>
+      </Modal>
     </Box>
   )
 }
