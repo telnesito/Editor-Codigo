@@ -1,4 +1,4 @@
-import { Box, Modal, Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from "@mui/material"
+import { Box, Modal, Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography, Backdrop, CircularProgress } from "@mui/material"
 import CodeIcon from '@mui/icons-material/Code';
 import StorageIcon from '@mui/icons-material/Storage';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
@@ -20,12 +20,18 @@ const Projects = () => {
   const navigate = useNavigate()
   const { Code, setCode } = useContext(ContextCode)
   const { idProject, setIdProject } = useContext(ContextIdProject)
+  const [loading, setLoading] = useState(false)
+
+  setIdProject('')
+
 
   useEffect(() => {
     const traerProyectos = async () => {
       try {
+        setLoading(true)
         const response = await projects.getProjects();
         setListProjects(response);
+        setLoading(false)
       } catch (error) {
         console.error(error);
       }
@@ -33,11 +39,6 @@ const Projects = () => {
 
     traerProyectos();
   }, []);
-
-  useEffect(() => {
-    console.log(listProjects);
-  }, [listProjects]);
-
 
   const { isOpen, openModal, closeModal } = useModal()
 
@@ -51,9 +52,13 @@ const Projects = () => {
   const handleDeleteProject = async (idProject) => {
 
     try {
+      setLoading(true)
+
       const response = await projects.deleteProject({ idProject })
       setListProjects(() => listProjects.filter((project) => project.id !== idProject))
       console.error(response)
+      setLoading(false)
+
     } catch (error) {
       console.error(error)
 
@@ -164,6 +169,10 @@ const Projects = () => {
       </Box>
 
       {isOpen && <ModalCreateProjects isOpen={isOpen} closeModal={closeModal} />}
+
+      <Backdrop open={loading}>
+        <CircularProgress></CircularProgress>
+      </Backdrop>
 
 
 

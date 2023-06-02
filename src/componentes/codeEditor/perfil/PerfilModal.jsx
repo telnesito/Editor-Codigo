@@ -1,5 +1,5 @@
 import { Close } from "@mui/icons-material"
-import { Alert, AlertTitle, Box, Button, IconButton, Modal, Snackbar, TextField, Tooltip, Typography } from "@mui/material"
+import { Alert, AlertTitle, Backdrop, Box, Button, CircularProgress, IconButton, Modal, Snackbar, TextField, Tooltip, Typography } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import "aos/dist/aos.css"
@@ -13,13 +13,23 @@ const PerfilModa = ({ closeModal, isOpen }) => {
   const [confirmUpdate, setConfirmUpdate] = useState(false)
   const [correo, setCorreo] = useState('')
   const [modalState, setModalState] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [InfoChangePassword, setInfoChangePassword] = useState(false)
 
   useEffect(() => {
     Aos.init({ duration: 500 })
 
     const cargarPerfil = async () => {
-      const { email, uid } = await auth.getProfile()
-      setCorreo(email)
+      try {
+        setLoading(true)
+
+        const { email, uid } = await auth.getProfile()
+        setCorreo(email)
+        setLoading(false)
+
+      } catch (error) {
+        console.error(error)
+      }
     }
 
     cargarPerfil()
@@ -28,7 +38,10 @@ const PerfilModa = ({ closeModal, isOpen }) => {
 
   const handleLogOut = async () => {
     try {
+      setLoading(true)
+
       const response = await auth.cerrarSesion()
+      setLoading(false)
 
       if (response) {
         navigate('/')
@@ -42,7 +55,11 @@ const PerfilModa = ({ closeModal, isOpen }) => {
 
   const handleDeleteUser = async () => {
     try {
+      setLoading(true)
+
       const response = await auth.deleteUser()
+      setLoading(false)
+
       if (response) {
         navigate('/')
       }
@@ -55,13 +72,19 @@ const PerfilModa = ({ closeModal, isOpen }) => {
     if (newPassowrd === validValue) {
 
       try {
+        setLoading(true)
         const response = await auth.actualizarClave({ newPassowrd })
         console.log(response)
+        setLoading(false)
         setConfirmUpdate(true)
+        setNewPassowrd('')
+        setValidValue('')
       } catch (error) {
         console.log(error)
 
       }
+    } else {
+      setInfoChangePassword(true)
     }
   }
 
@@ -95,8 +118,8 @@ const PerfilModa = ({ closeModal, isOpen }) => {
           <Box color={'black'} display={'flex'} alignItems={'left'} gap={'10px'} flexDirection={'column'} width={'100%'}>
             <Typography fontWeight={'500'} variant="body">Cambiar contraseña</Typography>
 
-            <TextField type="password" onChange={({ target }) => setNewPassowrd(target.value)} label={'New passowrd'} variant="standard" />
-            <TextField type="password" onChange={({ target }) => setValidValue(target.value)} label={'Confirm new passowrd'} variant="standard" />
+            <TextField type="password" value={newPassowrd} onChange={({ target }) => setNewPassowrd(target.value)} label={'New passowrd'} variant="standard" />
+            <TextField type="password" value={validValue} onChange={({ target }) => setValidValue(target.value)} label={'Confirm new passowrd'} variant="standard" />
             <Button variant="contained" onClick={handleUpdatePassword} color="secondary">Set Password</Button>
           </Box>
 
@@ -138,6 +161,13 @@ const PerfilModa = ({ closeModal, isOpen }) => {
           </Box>
         </Modal>}
 
+        <Snackbar open={InfoChangePassword} onClose={() => setInfoChangePassword(false)}>
+          <Alert severity="error">La clave debe ser igual en ambos inputs, verificar e intentar de nuevo</Alert>
+        </Snackbar>
+
+        <Backdrop open={loading}>
+          <CircularProgress />
+        </Backdrop>
 
       </Box>
 

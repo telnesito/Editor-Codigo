@@ -1,12 +1,12 @@
 import { Close } from '@mui/icons-material'
-import { Modal, Box, Paper, Typography, Card, CardContent, IconButton, TextField, Alert } from '@mui/material'
+import { Modal, Box, Paper, Typography, Card, CardContent, Backdrop, CircularProgress, IconButton, TextField, Alert } from '@mui/material'
 import generateUniqueId from 'generate-unique-id'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { ContextCode } from '../../../hooks/context/CodeContext'
 import { useEffect, useState } from "react"
 import "aos/dist/aos.css"
-import Aos from 'aos'
+import Aos, { refresh } from 'aos'
 import { projects } from '../../../../services/projects'
 const ModalCreateProjects = ({ isOpen, closeModal }) => {
 
@@ -17,6 +17,7 @@ const ModalCreateProjects = ({ isOpen, closeModal }) => {
 
   const navigate = useNavigate()
   const { Code, setCode } = useContext(ContextCode)
+  const [loading, setLoading] = useState(false)
   const [value, setValue] = useState('')
 
   const LENGUAJES =
@@ -79,6 +80,7 @@ const ModalCreateProjects = ({ isOpen, closeModal }) => {
       // ...crear proyecto
       // If todo bien... se crea y navega al editor
       if (value) {
+        setLoading(true)
 
         const response = await projects.createProjects({
           nombre: value,
@@ -87,9 +89,12 @@ const ModalCreateProjects = ({ isOpen, closeModal }) => {
           fecha: `${currentDate.toLocaleDateString()}`,
           ultimoCambio: `${currentDate.toLocaleDateString()}`
         })
+
         console.error(response)
-        navigate(`/home/${to.toLowerCase()}`)
+        setLoading(false)
+        closeModal()
         setCode('')
+        window.location.reload()
       }
 
     } catch (error) {
@@ -156,7 +161,12 @@ const ModalCreateProjects = ({ isOpen, closeModal }) => {
 
 
 
+        <Backdrop open={loading}>
+          <CircularProgress></CircularProgress>
+        </Backdrop>
       </Paper>
+
+
     </Modal>
   )
 }

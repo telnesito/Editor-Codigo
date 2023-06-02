@@ -1,6 +1,6 @@
 import "../login/Login.css"
 
-import { Box, Button, Snackbar, IconButton, TextField, Typography, Alert } from "@mui/material"
+import { Box, Button, Snackbar, IconButton, Backdrop, CircularProgress, TextField, Typography, Alert } from "@mui/material"
 import { useFormik } from "formik"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -19,19 +19,20 @@ const SingUp = () => {
 
   const [snackbar, setSnackbar] = useState(false)
   const [errSnack, setErrSnack] = useState(false)
-
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const handleSnackbar = (action) => setSnackbar(action)
 
 
   const handleFormSubmit = async ({ email, confirmEmail, password }) => {
     if (email === confirmEmail) {
-
       try {
+        setLoading(true)
         const newUser = await auth.crearCuenta({ email, password })
         if (newUser.uid) {
           handleSnackbar(true)
           sendEmailVerification()
+          console.log(newUser)
           setTimeout(() => {
             navigate('/authenticator/login')
           }, 3000);
@@ -39,6 +40,7 @@ const SingUp = () => {
           setErrSnack(true)
         }
 
+        setLoading(false)
       } catch (error) {
         console.error('peque;a')
 
@@ -169,6 +171,10 @@ const SingUp = () => {
         <Alert elevation={3} variant="filled" severity="error">Por favor verificar que el correo electronico sea igual y que la clave sea mayor a 5 digitos!</Alert>
 
       </Snackbar>
+
+      <Backdrop open={loading}>
+        <CircularProgress></CircularProgress>
+      </Backdrop>
 
     </Box>
   )

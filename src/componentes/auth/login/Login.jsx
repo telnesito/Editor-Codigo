@@ -1,4 +1,4 @@
-import { Box, Button, Typography, Paper, TextField, IconButton, Snackbar, Alert, Modal } from '@mui/material';
+import { Box, Button, Typography, Paper, TextField, IconButton, Snackbar, Alert, Modal, Backdrop, CircularProgress } from '@mui/material';
 import { useFormik } from 'formik';
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
@@ -20,19 +20,32 @@ const Login = () => {
   const [VerifEmailError, setVerifEmailError] = useState(false)
   const [disableBtn, setDisableBtn] = useState(false)
   const [countBtn, setCountBtn] = useState(0)
+  const [correoRecuperacion, setCorreoRecuperacion] = useState("")
+  const [forgetPassword, setForgetPassword] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [recoveryInfo, setRecoveryInfo] = useState(false)
   const [validError, setValidError] = useState({
     code: '', message: ''
   })
   const handleFormSubmit = async ({ email, password }) => {
 
-    const response = await auth.iniciarSesion({ email, password })
 
-    console.error(email, password)
-    if (response.uid) {
-      validarEmail(response)
-    } else {
-      setPassError(true)
+    try {
+      setLoading(true)
+      const response = await auth.iniciarSesion({ email, password })
+      console.error(email, password)
+
+      if (response.uid) {
+        validarEmail(response)
+      } else {
+        setPassError(true)
+      }
+
+      setLoading(false)
+    } catch (error) {
+      console.error(error)
     }
+
 
   }
 
@@ -74,6 +87,19 @@ const Login = () => {
       }, 10000);
     } catch (error) {
       console.log(error)
+    }
+
+  }
+
+  const handlePasswordRecovery = async (e) => {
+    e.preventDefault()
+    try {
+      await auth.recuperarClave({ email: correoRecuperacion })
+      setRecoveryInfo(true)
+      setForgetPassword(false)
+    } catch (error) {
+      console.error(error)
+
     }
 
   }
@@ -134,7 +160,7 @@ const Login = () => {
           />
 
           <Button sx={{ mt: '20px', height: '50px', fontWeight: '700' }} variant='contained' type='submit'>Ingresar</Button>
-          <Typography fontSize={'15px'} fontWeight={700} color={'#415A77'} textAlign={'center'}>Forgot your password?</Typography>
+          <Button onClick={() => setForgetPassword(true)}>Forgot your password?</Button>
         </form>
       </Box>
 
@@ -183,6 +209,56 @@ const Login = () => {
           </Alert> : "  "}
         </Paper>
       </Modal>
+
+      <Modal
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        open={forgetPassword} onClose={() => setForgetPassword(false)}>
+        <Paper data-aos="fade-left"
+          sx={{
+            minHeight: '250px',
+            height: 'auto',
+            justifyContent: 'center',
+            width: '350px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}
+        >
+
+          <Box
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'center'}
+            height={'100%'}
+            gap={'10px'}
+            width={'80%'}
+          >
+            <Alert severity='warning'>
+              Ingresar correo electronico de la cuenta asociada a la que se requiere recuperar la clave
+            </Alert>
+            <Typography>Ingresar el correo electronico</Typography>
+            <form onSubmit={(e) => handlePasswordRecovery(e)}>
+              <TextField type='email' required value={correoRecuperacion} onChange={({ target }) => setCorreoRecuperacion(target.value)} placeholder='Correo electronico' fullWidth variant='standard'></TextField>
+              <Button sx={{ mt: '10px' }} type='submit' color='secondary' variant='contained'>Recuperar</Button>
+            </form>
+
+          </Box>
+        </Paper>
+      </Modal>
+      <Snackbar open={recoveryInfo} onClose={() => setRecoveryInfo(false)}>
+        <Alert severity='success'>
+          <Box display={'flex'}>
+            <Typography>
+              Un email con las instrucciones de recuperacion de clave ha sido enviado a
+            </Typography>
+            <Typography fontWeight={700} ml={'5px'}>{`${correoRecuperacion}`}</Typography>
+          </Box>
+
+        </Alert>
+      </Snackbar>
+      <Backdrop open={loading}>
+        <CircularProgress></CircularProgress>
+      </Backdrop>
     </Box>
   )
 }
