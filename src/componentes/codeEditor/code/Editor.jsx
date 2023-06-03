@@ -38,10 +38,11 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
 
   const importFile = async (event) => {
     let archivo = event.target.files[0]
+
     try {
       let contenido = await archivo.text()
       setCode(contenido)
-
+      event.target.value = null; // Limpiar el input de archivo
     } catch (error) {
       console.error('Error al leer el archivo:', error);
     }

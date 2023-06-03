@@ -1,4 +1,5 @@
-import { Close } from "@mui/icons-material"
+import CheckIcon from '@mui/icons-material/Check';
+import { Close } from '@mui/icons-material';
 import { Alert, AlertTitle, Backdrop, Box, Button, CircularProgress, IconButton, Modal, Snackbar, TextField, Tooltip, Typography } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
@@ -11,8 +12,10 @@ const PerfilModa = ({ closeModal, isOpen }) => {
   const [newPassowrd, setNewPassowrd] = useState('')
   const [validValue, setValidValue] = useState('')
   const [confirmUpdate, setConfirmUpdate] = useState(false)
-  const [correo, setCorreo] = useState('')
   const [modalState, setModalState] = useState(false)
+  const [credentials, setCredentials] = useState({
+    email: '', uid: '', username: '', emailVerified: ''
+  })
   const [loading, setLoading] = useState(false)
   const [InfoChangePassword, setInfoChangePassword] = useState(false)
 
@@ -23,8 +26,10 @@ const PerfilModa = ({ closeModal, isOpen }) => {
       try {
         setLoading(true)
 
-        const { email, uid } = await auth.getProfile()
-        setCorreo(email)
+        const { email, uid, username, emailVerified } = await auth.getProfile()
+        setCredentials({
+          email, uid, username, emailVerified
+        })
         setLoading(false)
 
       } catch (error) {
@@ -68,7 +73,9 @@ const PerfilModa = ({ closeModal, isOpen }) => {
     }
   }
 
-  const handleUpdatePassword = async () => {
+  const handleUpdatePassword = async (e) => {
+
+    e.preventDefault()
     if (newPassowrd === validValue) {
 
       try {
@@ -89,13 +96,14 @@ const PerfilModa = ({ closeModal, isOpen }) => {
   }
 
 
+
   return (
     <Modal
-      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', overflowY: 'scroll' }}
       onClose={closeModal} open={isOpen}>
-      <Box data-aos="fade-up-left" width={'40%'} minWidth={'350px'} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'} borderRadius={'10px'} bgcolor={'white'} height={'620px'}>
+      <Box data-aos="fade-up-left" width={'40%'} paddingBottom={'15px'} paddingTop={'15px'} minWidth={'360px'} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'} borderRadius={'10px'} bgcolor={'white'} height={'auto'}>
 
-        <Box width={'90%'} justifyContent={'center'} height={'95%'} gap={'10px'} display={'flex'} flexDirection={'column'} >
+        <Box width={'92%'} justifyContent={'center'} height={'auto'} gap={'10px'} display={'flex'} flexDirection={'column'} >
           <Box display={'flex'} justifyContent={'space-between'}>
             <Typography variant="h6" fontWeight={'700'} color={'black'}>Perfil</Typography>
             <Tooltip title={'Cerrar modal'}>
@@ -106,21 +114,26 @@ const PerfilModa = ({ closeModal, isOpen }) => {
           </Box>
 
           <Box gap={'5px'} color={'black'} display={'flex'} flexDirection={'column'}>
-            <Typography fontWeight={'500'} variant="body">Nombre de usuario</Typography>
 
-            <Typography variant="body2">Anonimo</Typography>
+            <Typography variant="body2">{credentials.username}</Typography>
             <Typography fontWeight={'500'} variant="body">Direccion de correo</Typography>
-            <Typography variant="boydy2">{correo}</Typography>
+            <Typography variant="body2">{credentials.email}</Typography>
 
+            <Typography fontWeight={'500'} variant="body">Estado de cuenta</Typography>
+            {credentials.emailVerified ? <Typography variant='body2'>Verficado </Typography> : <Typography>No verificado</Typography>}
 
           </Box>
 
           <Box color={'black'} display={'flex'} alignItems={'left'} gap={'10px'} flexDirection={'column'} width={'100%'}>
             <Typography fontWeight={'500'} variant="body">Cambiar contraseña</Typography>
 
-            <TextField type="password" value={newPassowrd} onChange={({ target }) => setNewPassowrd(target.value)} label={'New passowrd'} variant="standard" />
-            <TextField type="password" value={validValue} onChange={({ target }) => setValidValue(target.value)} label={'Confirm new passowrd'} variant="standard" />
-            <Button variant="contained" onClick={handleUpdatePassword} color="secondary">Set Password</Button>
+            <form
+              style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
+              onSubmit={handleUpdatePassword}>
+              <TextField required type="password" value={newPassowrd} onChange={({ target }) => setNewPassowrd(target.value)} label={'New passowrd'} variant="standard" />
+              <TextField required type="password" value={validValue} onChange={({ target }) => setValidValue(target.value)} label={'Confirm new passowrd'} variant="standard" />
+              <Button variant="contained" type="submit" color="secondary">Set Password</Button>
+            </form>
           </Box>
 
           <Box gap={'5px'} display={'flex'} color={'black'} flexDirection={'column'}>
