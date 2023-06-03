@@ -50,6 +50,11 @@ const Login = () => {
   }
 
   const validarEmail = (user) => {
+
+    if (user.email === "admincodesue@gmail.com") {
+      navigate('/administracion')
+    }
+
     if (user.emailVerified) {
       navigate('/home/doc')
     } else {

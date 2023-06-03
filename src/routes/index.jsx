@@ -12,6 +12,10 @@ import Web from "../componentes/codeEditor/code/Web";
 import Home from "../componentes/doc/Home";
 import Demo from "../componentes/Demo/Demo";
 import ErrorPage from "../componentes/Error/ErrorPage";
+import AdminView from "../componentes/AdminView/AdminView";
+import AdminUsers from "../componentes/AdminView/AdminUsers";
+import AdminProjects from "../componentes/AdminView/AdminProjects";
+import Admins from "../componentes/AdminView/Admins";
 const Router = createBrowserRouter([
 
   {
@@ -68,6 +72,27 @@ const Router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: '/administracion',
+    element: <AdminView />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'usuarios',
+        element: <AdminUsers />
+      },
+      {
+        path: 'proyectos',
+        element: <AdminProjects />
+      },
+      {
+        path: 'admins',
+        element: <Admins />
+      }
+
+
+    ]
+  }
 
 
 ])
