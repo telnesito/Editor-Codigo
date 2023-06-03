@@ -200,14 +200,7 @@ const Projects = () => {
             </Table>
           </Box>
 
-          {/* <TableRow>
-                  <TableCell>No tienes proyectos creados todavia</TableCell>
-                  <TableCell>n/a</TableCell>
-                  <TableCell>n/a</TableCell>
-                  <TableCell>n/a</TableCell>
-                  <TableCell>n/a</TableCell>
 
-                </TableRow> */}
 
         </Paper>
       </Box>
