@@ -20,6 +20,8 @@ const Projects = () => {
   const navigate = useNavigate()
   const { Code, setCode } = useContext(ContextCode)
   const { idProject, setIdProject } = useContext(ContextIdProject)
+  const [searchText, setSearchText] = useState("")
+  const [filteredList, setFilteredList] = useState([])
   const [loading, setLoading] = useState(false)
   const [modalDelete, setModalDelete] = useState(false)
   const [deleteInfo, setDeleteInfo] = useState("")
@@ -88,6 +90,16 @@ const Projects = () => {
 
   }
 
+  useEffect(() => {
+
+    const filtered = listProjects.filter((project) => project.nombre.toLowerCase().includes(searchText.toLowerCase()))
+    setFilteredList(filtered)
+  }, [searchText, listProjects])
+
+  const handleFilterProjects = (text) => {
+    setSearchText(text)
+
+  }
 
   return (
     <Box gap={'10px'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} height={'100%'} width={'100%'} bgcolor={'#e1e1e1'}>
@@ -107,7 +119,7 @@ const Projects = () => {
               <Box width={'50%'}>
                 <Box display={'flex'} alignItems={'center'} height={'35px'} >
                   <BorderColorIcon />
-                  <Typography> 10 Proyectos por cuenta</Typography>
+                  <Typography> Crea proyectos ilimitados</Typography>
                 </Box>
                 <Box display={'flex'} alignItems={'center'} height={'35px'}>
                   <StorageIcon />
@@ -142,6 +154,7 @@ const Projects = () => {
         <Paper sx={{ padding: '15px', overflowY: 'scroll', height: '100%', }}>
           <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} width={'100%'}>
             <Typography color={'#007ACC'} variant="h4">Proyectos</Typography>
+            <TextField value={searchText} onChange={({ target }) => handleFilterProjects(target.value)} sx={{ width: '300px' }} variant="standard" label={'Buscar proyecto'}></TextField>
           </Box>
 
 
@@ -156,38 +169,45 @@ const Projects = () => {
 
 
                   <TableCell>Accion</TableCell>
-
                 </TableRow>
               </TableHead>
               <TableBody >
-                {listProjects.length > 0 ? listProjects.map(({ fecha, nombre, lenguaje, contenido, ultimoCambio, id }, index) => <TableRow key={index}>
-                  <TableCell>{nombre}</TableCell>
-                  <TableCell>{lenguaje}</TableCell>
-                  <TableCell>{fecha}</TableCell>
-                  <TableCell>{ultimoCambio}</TableCell>
+                {filteredList.length > 0 && filteredList.map(({ fecha, nombre, lenguaje, contenido, ultimoCambio, id }, index) =>
+                  <TableRow key={index}>
+                    <TableCell>{nombre}</TableCell>
+                    <TableCell>{lenguaje}</TableCell>
+                    <TableCell>{fecha}</TableCell>
+                    <TableCell>{ultimoCambio}</TableCell>
 
-                  <TableCell>
-                    <Box display={'flex'} gap={'10px'}>
-                      <Button variant="contained" onClick={() => handleOpenProject(lenguaje, contenido, id)} color="success">Abrir</Button>
-                      <Button variant="contained" onClick={() => handleDeleteProject(id, nombre)} color="error">Eliminar</Button>
-                    </Box>
+                    <TableCell>
+                      <Box display={'flex'} gap={'10px'}>
+                        <Button variant="contained" onClick={() => handleOpenProject(lenguaje, contenido, id)} color="success">Abrir</Button>
+                        <Button variant="contained" onClick={() => handleDeleteProject(id, nombre)} color="error">Eliminar</Button>
+                      </Box>
+                    </TableCell>
+                  </TableRow>)}
 
-
-                  </TableCell>
-
-
-                </TableRow>) : <TableRow>
-                  <TableCell>No tienes proyectos creados todavia</TableCell>
+                {filteredList.length === 0 && <TableRow>
+                  <TableCell>No hay un proyecto que mostrar</TableCell>
                   <TableCell>n/a</TableCell>
                   <TableCell>n/a</TableCell>
                   <TableCell>n/a</TableCell>
                   <TableCell>n/a</TableCell>
+
 
                 </TableRow>}
               </TableBody>
             </Table>
           </Box>
 
+          {/* <TableRow>
+                  <TableCell>No tienes proyectos creados todavia</TableCell>
+                  <TableCell>n/a</TableCell>
+                  <TableCell>n/a</TableCell>
+                  <TableCell>n/a</TableCell>
+                  <TableCell>n/a</TableCell>
+
+                </TableRow> */}
 
         </Paper>
       </Box>
