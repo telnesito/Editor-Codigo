@@ -1,4 +1,4 @@
-import { Box, Modal, Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography, Backdrop, CircularProgress } from "@mui/material"
+import { Box, Modal, Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography, Backdrop, CircularProgress, Alert, IconButton, Snackbar } from "@mui/material"
 import CodeIcon from '@mui/icons-material/Code';
 import StorageIcon from '@mui/icons-material/Storage';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
@@ -12,7 +12,7 @@ import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import { ContextCode } from "../../../hooks/context/CodeContext";
 import { ContextIdProject } from "../../../hooks/context/IdProjectContext";
-
+import Aos from "aos";
 
 const Projects = () => {
 
@@ -21,11 +21,18 @@ const Projects = () => {
   const { Code, setCode } = useContext(ContextCode)
   const { idProject, setIdProject } = useContext(ContextIdProject)
   const [loading, setLoading] = useState(false)
+  const [modalDelete, setModalDelete] = useState(false)
+  const [deleteInfo, setDeleteInfo] = useState("")
+  const [confirmDelete, setConfirmDelete] = useState("")
+  const [infoConfirmDelete, setInfoConfirmDelete] = useState(false)
+  const [projectToDelete, setProjectToDelete] = useState({
+    id: '', name: ''
+  })
 
   setIdProject('')
 
-
   useEffect(() => {
+    Aos.init({ duration: 500 })
     const traerProyectos = async () => {
       try {
         setLoading(true)
@@ -49,15 +56,30 @@ const Projects = () => {
 
   }
 
-  const handleDeleteProject = async (idProject) => {
+  const handleDeleteProject = (idToDelete, name) => {
+    setDeleteInfo("")
+    setConfirmDelete("")
+    setProjectToDelete({ id: idToDelete, name })
+    setModalDelete(true)
+  }
 
+  const handleConfirmDelete = async (e) => {
+    e.preventDefault()
     try {
-      setLoading(true)
 
-      const response = await projects.deleteProject({ idProject })
-      setListProjects(() => listProjects.filter((project) => project.id !== idProject))
-      console.error(response)
-      setLoading(false)
+      if (confirmDelete === projectToDelete.name) {
+
+        setLoading(true)
+        const response = await projects.deleteProject({ "idProject": projectToDelete.id })
+        setListProjects(() => listProjects.filter((project) => project.id !== projectToDelete.id))
+        console.error(response)
+        console.error(projectToDelete)
+        setLoading(false)
+        setModalDelete(false)
+        setInfoConfirmDelete(true)
+      } else {
+        setDeleteInfo("No coincide con el nombre del proyecto")
+      }
 
     } catch (error) {
       console.error(error)
@@ -65,6 +87,8 @@ const Projects = () => {
     }
 
   }
+
+
   return (
     <Box gap={'10px'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} height={'100%'} width={'100%'} bgcolor={'#e1e1e1'}>
 
@@ -145,7 +169,7 @@ const Projects = () => {
                   <TableCell>
                     <Box display={'flex'} gap={'10px'}>
                       <Button variant="contained" onClick={() => handleOpenProject(lenguaje, contenido, id)} color="success">Abrir</Button>
-                      <Button variant="contained" onClick={() => handleDeleteProject(id)} color="error">Eliminar</Button>
+                      <Button variant="contained" onClick={() => handleDeleteProject(id, nombre)} color="error">Eliminar</Button>
                     </Box>
 
 
@@ -170,11 +194,65 @@ const Projects = () => {
 
       {isOpen && <ModalCreateProjects isOpen={isOpen} closeModal={closeModal} />}
 
-      <Backdrop open={loading}>
-        <CircularProgress></CircularProgress>
-      </Backdrop>
+
+      <Modal
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+
+        open={modalDelete} onClose={() => setModalDelete(false)}>
+        <Paper
+          data-aos="fade-up-left"
+          elevation={4}
+          sx={{
+            height: 'auto',
+            paddingTop: '10px',
+            paddingBottom: '10px',
+            width: '500px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <Backdrop open={loading}>
+            <CircularProgress></CircularProgress>
+          </Backdrop>
+          <Box
+            width={'90%'}
+            display={'flex'}
+            flexDirection={'column'}
+            gap={'5px'}
+          >
+
+            <Alert severity="warning">
+              Estas seguro que desea eliminar el proyecto <Typography component={'span'} fontWeight={700}>{projectToDelete.name}</Typography> ?
+            </Alert>
+
+            <Alert severity="info">
+              Para eliminar el proyecto, escribe el nombre en el cuadro de abajo para confirmar
+            </Alert>
+
+            {deleteInfo !== "" ? <Alert severity="error">{deleteInfo}</Alert> : ""}
+
+            <form onSubmit={handleConfirmDelete}
+              style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <TextField value={confirmDelete} onChange={({ target }) => setConfirmDelete(target.value)} required label={projectToDelete.name} variant="standard" type="text" placeholder={projectToDelete.name}></TextField>
+              <Button variant="contained" type="submit" color="error">Eliminar</Button>
+            </form>
+
+          </Box>
+        </Paper>
+      </Modal>
 
 
+      <Snackbar open={infoConfirmDelete} autoHideDuration={3000} onClose={() => setInfoConfirmDelete(false)}>
+        <Alert severity="success">
+          Proyecto <Typography fontWeight={700} component={'span'}>{projectToDelete.name}</Typography> eliminado correctamente!
+        </Alert>
+      </Snackbar>
 
     </Box>
   )

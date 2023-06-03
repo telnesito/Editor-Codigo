@@ -48,7 +48,8 @@ const SingUp = () => {
 
 
     } else {
-      console.log('Verifique email')
+      setErrSnack(true)
+
     }
   }
 
