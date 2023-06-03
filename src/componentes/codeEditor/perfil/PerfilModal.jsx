@@ -13,6 +13,7 @@ const PerfilModa = ({ closeModal, isOpen }) => {
   const [validValue, setValidValue] = useState('')
   const [confirmUpdate, setConfirmUpdate] = useState(false)
   const [modalState, setModalState] = useState(false)
+  const [disableForVisit, setDisableForVisit] = useState(false)
   const [credentials, setCredentials] = useState({
     email: '', uid: '', username: '', emailVerified: ''
   })
@@ -32,6 +33,12 @@ const PerfilModa = ({ closeModal, isOpen }) => {
         })
         setLoading(false)
 
+        if (!credentials.emailVerified) {
+          setDisableForVisit(true)
+        } else {
+          setDisableForVisit(false)
+        }
+
       } catch (error) {
         console.error(error)
       }
@@ -39,7 +46,7 @@ const PerfilModa = ({ closeModal, isOpen }) => {
 
     cargarPerfil()
 
-  }, [])
+  }, [credentials.emailVerified])
 
   const handleLogOut = async () => {
     try {
@@ -117,10 +124,10 @@ const PerfilModa = ({ closeModal, isOpen }) => {
 
             <Typography variant="body2">{credentials.username}</Typography>
             <Typography fontWeight={'500'} variant="body">Direccion de correo</Typography>
-            <Typography variant="body2">{credentials.email}</Typography>
+            <Typography variant="body2">{credentials.email ? credentials.email : "Modo visitante"}</Typography>
 
             <Typography fontWeight={'500'} variant="body">Estado de cuenta</Typography>
-            {credentials.emailVerified ? <Typography variant='body2'>Verficado </Typography> : <Typography>No verificado</Typography>}
+            {credentials.emailVerified ? <Typography variant='body2'>Verficado </Typography> : <Typography variant='body2'>No verificado</Typography>}
 
           </Box>
 
@@ -130,9 +137,9 @@ const PerfilModa = ({ closeModal, isOpen }) => {
             <form
               style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
               onSubmit={handleUpdatePassword}>
-              <TextField required type="password" value={newPassowrd} onChange={({ target }) => setNewPassowrd(target.value)} label={'New passowrd'} variant="standard" />
-              <TextField required type="password" value={validValue} onChange={({ target }) => setValidValue(target.value)} label={'Confirm new passowrd'} variant="standard" />
-              <Button variant="contained" type="submit" color="secondary">Set Password</Button>
+              <TextField disabled={disableForVisit} required type="password" value={newPassowrd} onChange={({ target }) => setNewPassowrd(target.value)} label={'New passowrd'} variant="standard" />
+              <TextField disabled={disableForVisit} required type="password" value={validValue} onChange={({ target }) => setValidValue(target.value)} label={'Confirm new passowrd'} variant="standard" />
+              <Button disabled={disableForVisit} variant="contained" type="submit" color="secondary">Set Password</Button>
             </form>
           </Box>
 
@@ -142,7 +149,7 @@ const PerfilModa = ({ closeModal, isOpen }) => {
 
             <Button onClick={() => {
               setModalState(true)
-            }} variant="contained" color="error">Borrar cuenta</Button>
+            }} variant="contained" disabled={disableForVisit} color="error">Borrar cuenta</Button>
           </Box>
           <Box gap={'5px'} display={'flex'} color={'black'} flexDirection={'column'}>
             <Typography fontWeight={'500'} variant="body">Cerrar sesion</Typography>
