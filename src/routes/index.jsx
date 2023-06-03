@@ -11,11 +11,13 @@ import Javascript from "../componentes/codeEditor/code/Javascript";
 import Web from "../componentes/codeEditor/code/Web";
 import Home from "../componentes/doc/Home";
 import Demo from "../componentes/Demo/Demo";
+import ErrorPage from "../componentes/Error/ErrorPage";
 const Router = createBrowserRouter([
 
   {
     path: '/',
-    element: <Inicio />
+    element: <Inicio />,
+    errorElement: <ErrorPage />
   },
   {
     path: '/authenticator',
@@ -38,6 +40,7 @@ const Router = createBrowserRouter([
   {
     path: '/home',
     element: <CodeEditor />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: 'ruby',
