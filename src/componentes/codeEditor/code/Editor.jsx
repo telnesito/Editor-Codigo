@@ -115,11 +115,6 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
       >
 
         <Box display={'flex'} gap={'10px'} height={'60%'}>
-          <Tooltip title={'Compilar'}>
-            <IconButton size="large" onClick={manualCompile}>
-              <PlayArrow color="red" />
-            </IconButton>
-          </Tooltip>
 
           <Tooltip title={`Documentacion de ${lenguaje.toLowerCase()}`}>
             <IconButton href={doc} target="_blank" size="large">
@@ -162,13 +157,3 @@ const Editor = ({ lenguaje, icon, format, color, tools, doc }) => {
 
 export default Editor
 
-// Azul oscuro: #007ACC
-// Rojo oscuro: #D16969
-// Verde oscuro: #3FA33F
-// Amarillo oscuro: #EFD090
-// Naranja oscuro: #FFA500
-// Morado oscuro: #B33FB3
-// Gris oscuro: #1E1E1E
-// Gris medio: #4D4D4D
-// Gris claro: #CCCCCC
-// sx={{ backgroundImage: 'url(/img/ColoredShapes.svg)' }}
