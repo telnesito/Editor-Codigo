@@ -2,13 +2,19 @@ import { Box, Button, Menu, MenuItem, Card, CardActions, CardContent, IconButton
 import { auth } from '../../../services/auth'
 
 import { useEffect, useState } from 'react'
-import { MoreVert, Verified, Password, Email, Warning, Error } from '@mui/icons-material'
+import { MoreVert, Verified, Password, Email, Error } from '@mui/icons-material'
+
+import useModal from '../../hooks/state/useModal'
+import AdminProjects from './AdminProjects'
 
 const AdminUsers = () => {
   const [usuarios, setUsuarios] = useState([])
   const [filterUser, setFilterUser] = useState("")
   const [listUserFiltered, setListUserFiltered] = useState([])
-
+  const { closeModal, openModal, isOpen } = useModal()
+  const [userProjects, setUserProjects] = useState({
+    email: '', uid: ''
+  })
   useEffect(() => {
     const obtenerUsuarios = async () => {
       try {
@@ -22,12 +28,6 @@ const AdminUsers = () => {
 
     obtenerUsuarios()
   }, [])
-
-  // useEffect(() => {
-
-  //   const filtered = listProjects.filter((project) => project.nombre.toLowerCase().includes(searchText.toLowerCase()))
-  //   setFilteredList(filtered)
-  // }, [searchText, listProjects])
 
   const handleFilterUser = (text) => {
     setFilterUser(text)
@@ -58,6 +58,11 @@ const AdminUsers = () => {
       [index]: null // Restablecer la referencia del elemento al cerrar el menú
     }));
   };
+
+  const handleOpenProjects = (uid, email) => {
+    setUserProjects({ email, uid })
+    openModal()
+  }
 
   return (
     <Box
@@ -171,7 +176,7 @@ const AdminUsers = () => {
                 width={'100%'}
                 gap={'5px'}
               >
-                <Button variant='contained' size='small' color='primary'>Proyectos</Button>
+                <Button onClick={() => handleOpenProjects(uid, email)} variant='contained' size='small' color='primary'>Proyectos</Button>
                 <Button variant='outlined' size='small' color='error'>Eliminar</Button>
 
                 <IconButton onClick={(event) => handleClick(event, index)}> {/* Pasar el índice al hacer clic */}
@@ -182,6 +187,8 @@ const AdminUsers = () => {
           </Card>
         )}
       </Box>
+
+      {isOpen && <AdminProjects closeModal={closeModal} isOpen={isOpen} user={userProjects} />}
     </Box>
   )
 }
