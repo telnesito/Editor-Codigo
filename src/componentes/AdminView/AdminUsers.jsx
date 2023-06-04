@@ -19,6 +19,9 @@ const AdminUsers = () => {
   const [openChangePassowrd, setOpenChangePassowrd] = useState(false)
   const [userToChangePassword, setUserToChangePassword] = useState("")
   const [newPassword, setNewPassword] = useState("")
+  const [openChangeEmail, setOpenChangeEmail] = useState(false)
+  const [userToChangeEmail, setUserToChangeEmail] = useState("")
+  const [newEmail, setNewEmail] = useState("")
 
   const [userProjects, setUserProjects] = useState({
     email: '', uid: ''
@@ -106,6 +109,11 @@ const AdminUsers = () => {
     setUserToChangePassword(uid)
   }
 
+  const handleOpenChangeEmail = async (uid) => {
+    setOpenChangeEmail(true)
+    setUserToChangeEmail(uid)
+  }
+
   const handleSendNewPassword = async (e) => {
     e.preventDefault()
     try {
@@ -115,6 +123,22 @@ const AdminUsers = () => {
       setIsLoading(false)
 
       setOpenChangePassowrd(false)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+
+  const handleSendNewEmail = async (e) => {
+    e.preventDefault()
+    try {
+      setIsLoading(true)
+      await admin.ActualizarEmailPorId({ uid: userToChangeEmail, newEmail })
+      setIsLoading(false)
+
+      window.location.reload()
+
+      setOpenChangeEmail(false)
     } catch (error) {
       console.error(error)
     }
@@ -192,7 +216,7 @@ const AdminUsers = () => {
                     </Box>
                   </MenuItem>
                   <Divider />
-                  <MenuItem>
+                  <MenuItem onClick={() => handleOpenChangeEmail(user.uid)}>
                     <Box display={'flex'} alignItems={'center'} gap={'10px'}>
                       <Email color='primary' fontSize='small' />
                       <Typography variant='body2'>
@@ -308,6 +332,48 @@ const AdminUsers = () => {
           >
             <TextField onChange={({ target }) => setNewPassword(target.value)} placeholder='Escriba nueva clave' variant='standard' type='password' required label={'Cambiar clave'}></TextField>
             <Button type='submit' variant='contained' color='primary' >Cambiar clave</Button>
+          </form>
+          <Backdrop open={isLoading}>
+            <CircularProgress>
+
+            </CircularProgress>
+          </Backdrop>
+        </Paper>
+      </Modal>
+
+
+      <Modal
+        onClose={() => setOpenChangeEmail(false)}
+        open={openChangeEmail}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <Paper
+          sx={{
+            width: '400px',
+            height: '140px',
+            display: 'flex',
+            alignItems: 'left',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            padding: '10px',
+
+          }}
+        >
+          <Typography width={'90%'} variant='body1' fontWeight={700}>Cambiar correo electronico</Typography>
+          <form style={{
+            display: 'flex',
+            gap: '15px',
+            flexDirection: 'column',
+
+          }}
+            onSubmit={(e) => handleSendNewEmail(e)}
+          >
+            <TextField onChange={({ target }) => setNewEmail(target.value)} placeholder='Escriba nuevo correo' variant='standard' type='email' required label={'Cambiar email'}></TextField>
+            <Button type='submit' variant='contained' color='primary' >Cambiar correo electronico</Button>
           </form>
           <Backdrop open={isLoading}>
             <CircularProgress>
