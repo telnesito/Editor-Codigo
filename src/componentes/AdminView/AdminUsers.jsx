@@ -1,17 +1,21 @@
-import { Box, Button, Menu, MenuItem, Card, CardActions, CardContent, IconButton, Typography, Divider, TextField, Modal, Paper } from '@mui/material'
+import { Box, Button, Menu, MenuItem, Card, CardActions, CardContent, IconButton, Typography, Divider, TextField, Modal, Paper, Backdrop, CircularProgress } from '@mui/material'
 import { auth } from '../../../services/auth'
 
 import { useEffect, useState } from 'react'
-import { MoreVert, Verified, Password, Email, Error } from '@mui/icons-material'
+import { MoreVert, Verified, Password, Email, Error, ConstructionOutlined } from '@mui/icons-material'
 
 import useModal from '../../hooks/state/useModal'
 import AdminProjects from './AdminProjects'
+import { admin } from '../../../services/admin'
 
 const AdminUsers = () => {
   const [usuarios, setUsuarios] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
   const [filterUser, setFilterUser] = useState("")
   const [listUserFiltered, setListUserFiltered] = useState([])
   const { closeModal, openModal, isOpen } = useModal()
+  const [confirmDelete, setConfirmDelete] = useState(false)
+  const [userToDelete, setUserToDelete] = useState("")
 
   const [userProjects, setUserProjects] = useState({
     email: '', uid: ''
@@ -35,7 +39,7 @@ const AdminUsers = () => {
 
   useEffect(() => {
 
-    const filtered = usuarios.filter((user) => user.email.toLowerCase().includes(filterUser.toLowerCase()))
+    const filtered = usuarios.filter((user) => user.email.toLowerCase().includes(filterUser.toLowerCase()) && user.email !== "admincodesue@gmail.com")
 
     setListUserFiltered(filtered)
 
@@ -64,6 +68,35 @@ const AdminUsers = () => {
     openModal()
   }
 
+  const openConfirmDelete = (uid) => {
+    setUserToDelete(uid)
+    setConfirmDelete(true)
+
+  }
+
+  const deleteUser = async () => {
+    try {
+      setIsLoading(true)
+      const response = await admin.EliminarUserPorUID({ uid: userToDelete })
+      setConfirmDelete(false)
+      setListUserFiltered(() => usuarios.filter((user) => user.uid !== userToDelete && user.email !== "admincodesue@gmail.com"))
+      setIsLoading(false)
+      console.error(response)
+    } catch (error) {
+      console.error(error)
+
+    }
+  }
+
+  const handleVerifUser = async (uid) => {
+    try {
+      const response = await admin.ActualizarEstadoPorId({ uid })
+
+      console.info(response)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <Box
@@ -118,7 +151,7 @@ const AdminUsers = () => {
                   open={Boolean(anchorEl[index])} // Comprobar si la referencia existe
                   onClose={() => handleClose(index)} // Pasar el índice al cerrar el menú
                 >
-                  <MenuItem disabled={user.state}>
+                  <MenuItem onClick={() => handleVerifUser(user.uid)} disabled={user.state}>
                     <Box display={'flex'} alignItems={'center'} gap={'10px'}>
                       <Verified color='primary' fontSize='small' />
                       <Typography variant='body2'>
@@ -178,7 +211,7 @@ const AdminUsers = () => {
                 gap={'5px'}
               >
                 <Button onClick={() => handleOpenProjects(user.uid, user.email)} variant='contained' size='small' color='primary'>Proyectos</Button>
-
+                <Button variant='outlined' onClick={() => openConfirmDelete(user.uid)} size='small' color='error'>Eliminar</Button>
 
                 <IconButton onClick={(event) => handleClick(event, index)}> {/* Pasar el índice al hacer clic */}
                   <MoreVert />
@@ -190,7 +223,36 @@ const AdminUsers = () => {
       </Box>
 
       {isOpen && <AdminProjects closeModal={closeModal} isOpen={isOpen} user={userProjects} />}
+      <Modal
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+        open={confirmDelete} onClose={() => setConfirmDelete(false)}>
+        <Paper
+          sx={{
+            width: '400px',
+            height: '180px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            gap: '20px'
+          }}
+        >
+          <Typography>Estas seguro que desea eliminar este proyecto?</Typography>
+          <Box display={'flex'} gap={'10px'}>
+            <Button variant='contained' onClick={() => setConfirmDelete(false)} color='success'>Mantener</Button>
+            <Button variant='contained' onClick={() => deleteUser()} color='error'>Eliminar</Button>
+          </Box>
+          <Backdrop open={isLoading}>
+            <CircularProgress>
 
+            </CircularProgress>
+          </Backdrop>
+        </Paper>
+      </Modal>
     </Box>
   )
 }
