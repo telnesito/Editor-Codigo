@@ -109,8 +109,11 @@ const AdminUsers = () => {
   const handleSendNewPassword = async (e) => {
     e.preventDefault()
     try {
+      setIsLoading(true)
       console.info(userToChangePassword, newPassword)
       await admin.ActualizarPasswordPorId({ uid: userToChangePassword, newPassword })
+      setIsLoading(false)
+
       setOpenChangePassowrd(false)
     } catch (error) {
       console.error(error)
@@ -306,6 +309,11 @@ const AdminUsers = () => {
             <TextField onChange={({ target }) => setNewPassword(target.value)} placeholder='Escriba nueva clave' variant='standard' type='password' required label={'Cambiar clave'}></TextField>
             <Button type='submit' variant='contained' color='primary' >Cambiar clave</Button>
           </form>
+          <Backdrop open={isLoading}>
+            <CircularProgress>
+
+            </CircularProgress>
+          </Backdrop>
         </Paper>
       </Modal>
     </Box>
