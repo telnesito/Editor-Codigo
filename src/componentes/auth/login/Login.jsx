@@ -53,7 +53,7 @@ const Login = () => {
   const validarEmail = (user) => {
 
     if (user.email === "admincodesue@gmail.com") {
-      navigate('/administracion')
+      navigate('/administracion/ayuda')
     }
 
     if (user.emailVerified) {

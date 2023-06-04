@@ -1,4 +1,4 @@
-import { BuildCircle, GroupWork, Logout, SupervisedUserCircle } from '@mui/icons-material'
+import { BuildCircle, Logout, SupervisedUserCircle } from '@mui/icons-material'
 import { AppBar, Avatar, Box, IconButton, Menu, MenuItem, Toolbar, Typography, Divider } from '@mui/material'
 import { auth } from '../../../services/auth'
 import { Outlet, useNavigate } from 'react-router-dom'
@@ -78,10 +78,10 @@ const AdminView = () => {
 
 
         <MenuItem>
-          <Box onClick={() => navigate('admins')} display={'flex'} alignItems={'center'} gap={'10px'}>
+          <Box onClick={() => navigate('ayuda')} display={'flex'} alignItems={'center'} gap={'10px'}>
             <BuildCircle color='primary' fontSize='large' />
             <Typography>
-              Admin
+              Ayuda
             </Typography>
           </Box>
         </MenuItem>
@@ -97,6 +97,7 @@ const AdminView = () => {
           </Box>
         </MenuItem>
       </Menu>
+
 
       <Outlet />
 

@@ -6,9 +6,13 @@ import { MoreVert, Verified, Password, Email, Error } from '@mui/icons-material'
 
 import useModal from '../../hooks/state/useModal'
 import AdminProjects from './AdminProjects'
+import { useNavigate } from 'react-router-dom'
 import { admin } from '../../../services/admin'
 
 const AdminUsers = () => {
+
+  const navigate = useNavigate()
+
   const [usuarios, setUsuarios] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [filterUser, setFilterUser] = useState("")
@@ -22,6 +26,7 @@ const AdminUsers = () => {
   const [openChangeEmail, setOpenChangeEmail] = useState(false)
   const [userToChangeEmail, setUserToChangeEmail] = useState("")
   const [newEmail, setNewEmail] = useState("")
+  const [profileLogged, setProfileLogged] = useState({})
 
   const [userProjects, setUserProjects] = useState({
     email: '', uid: ''
@@ -38,6 +43,7 @@ const AdminUsers = () => {
 
     obtenerUsuarios()
   }, [])
+
 
   const handleFilterUser = (text) => {
     setFilterUser(text)
@@ -79,6 +85,7 @@ const AdminUsers = () => {
     setConfirmDelete(true)
 
   }
+
 
   const deleteUser = async () => {
     try {

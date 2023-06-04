@@ -82,15 +82,9 @@ const Router = createBrowserRouter([
         element: <AdminUsers />
       },
       {
-        path: 'proyectos',
-        element: <AdminProjects />
-      },
-      {
-        path: 'admins',
+        path: 'ayuda',
         element: <Admins />
       }
-
-
     ]
   }
 
