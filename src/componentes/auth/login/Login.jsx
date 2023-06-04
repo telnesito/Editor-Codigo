@@ -34,6 +34,7 @@ const Login = () => {
       setLoading(true)
       const response = await auth.iniciarSesion({ email, password })
       console.error(email, password)
+      console.error(response)
 
       if (response.uid) {
         validarEmail(response)

@@ -46,9 +46,6 @@ const AdminProjects = ({ closeModal, isOpen, user }) => {
   }
 
 
-
-
-
   return (
     <Modal
       sx={{

@@ -1,4 +1,4 @@
-import { Box, Button, Menu, MenuItem, Card, CardActions, CardContent, IconButton, Typography, Divider, TextField } from '@mui/material'
+import { Box, Button, Menu, MenuItem, Card, CardActions, CardContent, IconButton, Typography, Divider, TextField, Modal, Paper } from '@mui/material'
 import { auth } from '../../../services/auth'
 
 import { useEffect, useState } from 'react'
@@ -12,6 +12,7 @@ const AdminUsers = () => {
   const [filterUser, setFilterUser] = useState("")
   const [listUserFiltered, setListUserFiltered] = useState([])
   const { closeModal, openModal, isOpen } = useModal()
+
   const [userProjects, setUserProjects] = useState({
     email: '', uid: ''
   })
@@ -63,6 +64,7 @@ const AdminUsers = () => {
     openModal()
   }
 
+
   return (
     <Box
       display={'flex'}
@@ -90,7 +92,7 @@ const AdminUsers = () => {
         marginTop={'24px'}
       >
 
-        {listUserFiltered.length === 0 ? <Typography width={'95%'}>No hay usuarios que mostrar</Typography> : listUserFiltered.map(({ uid, email, state }, index) =>
+        {listUserFiltered.length === 0 ? <Typography width={'95%'}>No hay usuarios que mostrar</Typography> : listUserFiltered.map((user, index) =>
           <Card
             elevation={3}
             sx={{ width: '30%', minWidth: '300px' }}
@@ -116,7 +118,7 @@ const AdminUsers = () => {
                   open={Boolean(anchorEl[index])} // Comprobar si la referencia existe
                   onClose={() => handleClose(index)} // Pasar el índice al cerrar el menú
                 >
-                  <MenuItem disabled={state}>
+                  <MenuItem disabled={user.state}>
                     <Box display={'flex'} alignItems={'center'} gap={'10px'}>
                       <Verified color='primary' fontSize='small' />
                       <Typography variant='body2'>
@@ -145,11 +147,11 @@ const AdminUsers = () => {
                   </MenuItem>
                 </Menu>
                 <Typography fontWeight={'700'} variant='body'>Email</Typography>
-                <Typography variant='body2'>{email}</Typography>
+                <Typography variant='body2'>{user.email}</Typography>
                 <Typography fontWeight={'700'} variant='body'>UID</Typography>
-                <Typography variant='body2'>{uid}</Typography>
+                <Typography variant='body2'>{user.uid}</Typography>
                 <Typography variant='body' fontWeight={700}>Estado</Typography>
-                {state ?
+                {user.state ?
                   <Box display={'flex'} gap={'5px'} alignItems={'center'}>
 
                     <Typography variant='body2'>Verificado</Typography>
@@ -175,8 +177,8 @@ const AdminUsers = () => {
                 width={'100%'}
                 gap={'5px'}
               >
-                <Button onClick={() => handleOpenProjects(uid, email)} variant='contained' size='small' color='primary'>Proyectos</Button>
-                <Button variant='outlined' size='small' color='error'>Eliminar</Button>
+                <Button onClick={() => handleOpenProjects(user.uid, user.email)} variant='contained' size='small' color='primary'>Proyectos</Button>
+
 
                 <IconButton onClick={(event) => handleClick(event, index)}> {/* Pasar el índice al hacer clic */}
                   <MoreVert />
@@ -188,6 +190,7 @@ const AdminUsers = () => {
       </Box>
 
       {isOpen && <AdminProjects closeModal={closeModal} isOpen={isOpen} user={userProjects} />}
+
     </Box>
   )
 }
