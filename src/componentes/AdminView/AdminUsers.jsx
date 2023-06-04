@@ -20,7 +20,6 @@ const AdminUsers = () => {
       try {
         const response = await auth.obtenerUsuarios()
         setUsuarios(response)
-        console.log(response)
       } catch (error) {
         console.error(error)
       }

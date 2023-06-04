@@ -76,14 +76,7 @@ const AdminView = () => {
           </Box>
         </MenuItem>
 
-        <MenuItem>
-          <Box onClick={() => navigate('proyectos')} display={'flex'} alignItems={'center'} gap={'10px'}>
-            <GroupWork color='primary' fontSize='large' />
-            <Typography>
-              Proyectos
-            </Typography>
-          </Box>
-        </MenuItem>
+
         <MenuItem>
           <Box onClick={() => navigate('admins')} display={'flex'} alignItems={'center'} gap={'10px'}>
             <BuildCircle color='primary' fontSize='large' />
