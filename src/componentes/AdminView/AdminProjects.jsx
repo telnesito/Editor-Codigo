@@ -6,6 +6,8 @@ import { exportFile } from '../codeEditor/share/exportFile'
 const AdminProjects = ({ closeModal, isOpen, user }) => {
 
   const [userProjects, setUserProjects] = useState([])
+  const [deleteConfirm, setDeleteConfirm] = useState(false)
+  const [projectToDelete, setProjectToDelete] = useState("")
 
   useEffect(() => {
 
@@ -16,6 +18,7 @@ const AdminProjects = ({ closeModal, isOpen, user }) => {
           uid: user.uid
         })
         setUserProjects(response)
+        console.error(response)
       } catch (error) {
         console.error(error)
       }
@@ -24,6 +27,23 @@ const AdminProjects = ({ closeModal, isOpen, user }) => {
     cargarProyectos()
 
   }, [user.uid])
+
+  const handleDeleteProject = async (uid) => {
+    try {
+      await admin.EliminarProyectosPorUID({
+        idProject: projectToDelete, uid
+      })
+      setUserProjects(() => userProjects.filter((project) => project.id !== projectToDelete))
+      setDeleteConfirm(false)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleConfirmDelete = (id) => {
+    setProjectToDelete(id)
+    setDeleteConfirm(true)
+  }
 
 
 
@@ -79,7 +99,7 @@ const AdminProjects = ({ closeModal, isOpen, user }) => {
                   </TableCell>
 
                 </TableRow>
-                : userProjects.map(({ nombre, lenguaje, fecha, ultimoCambio, contenido }, index) =>
+                : userProjects.map(({ nombre, lenguaje, fecha, ultimoCambio, contenido, id }, index) =>
 
                   <TableRow key={index}>
                     <TableCell>{nombre}</TableCell>
@@ -91,10 +111,36 @@ const AdminProjects = ({ closeModal, isOpen, user }) => {
                       <Box display={'flex'} gap={'10px'}>
 
                         <Button onClick={() => exportFile(nombre, contenido, "txt")} variant='contained' color='success'>Descargar</Button>
-                        <Button variant='outlined' color='error'>Eliminar</Button>
+                        <Button variant='outlined' onClick={() => handleConfirmDelete(id)} color='error'>Eliminar</Button>
 
                       </Box>
                     </TableCell>
+                    <Modal
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                      open={deleteConfirm} onClose={() => setDeleteConfirm(false)}>
+                      <Paper
+                        sx={{
+                          width: '400px',
+                          height: '180px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexDirection: 'column',
+                          gap: '20px'
+                        }}
+                      >
+                        <Typography>Estas seguro que desea eliminar este proyecto?</Typography>
+                        <Box display={'flex'} gap={'10px'}>
+                          <Button variant='contained' onClick={() => setDeleteConfirm(false)} color='success'>Mantener</Button>
+                          <Button variant='contained' onClick={() => handleDeleteProject(user.uid)} color='error'>Eliminar</Button>
+                        </Box>
+
+                      </Paper>
+                    </Modal>
 
                   </TableRow>
                 )
@@ -105,6 +151,7 @@ const AdminProjects = ({ closeModal, isOpen, user }) => {
 
 
         </Box>
+
 
       </Paper>
     </Modal>
