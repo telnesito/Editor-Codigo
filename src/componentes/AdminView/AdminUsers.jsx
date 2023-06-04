@@ -2,7 +2,7 @@ import { Box, Button, Menu, MenuItem, Card, CardActions, CardContent, IconButton
 import { auth } from '../../../services/auth'
 
 import { useEffect, useState } from 'react'
-import { MoreVert, Verified, Password, Email, Error, ConstructionOutlined } from '@mui/icons-material'
+import { MoreVert, Verified, Password, Email, Error } from '@mui/icons-material'
 
 import useModal from '../../hooks/state/useModal'
 import AdminProjects from './AdminProjects'
@@ -16,6 +16,9 @@ const AdminUsers = () => {
   const { closeModal, openModal, isOpen } = useModal()
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [userToDelete, setUserToDelete] = useState("")
+  const [openChangePassowrd, setOpenChangePassowrd] = useState(false)
+  const [userToChangePassword, setUserToChangePassword] = useState("")
+  const [newPassword, setNewPassword] = useState("")
 
   const [userProjects, setUserProjects] = useState({
     email: '', uid: ''
@@ -90,9 +93,25 @@ const AdminUsers = () => {
 
   const handleVerifUser = async (uid) => {
     try {
-      const response = await admin.ActualizarEstadoPorId({ uid })
+      await admin.ActualizarEstadoPorId({ uid })
+      window.location.reload()
 
-      console.info(response)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleOpenChangePassword = async (uid) => {
+    setOpenChangePassowrd(true)
+    setUserToChangePassword(uid)
+  }
+
+  const handleSendNewPassword = async (e) => {
+    e.preventDefault()
+    try {
+      console.info(userToChangePassword, newPassword)
+      await admin.ActualizarPasswordPorId({ uid: userToChangePassword, newPassword })
+      setOpenChangePassowrd(false)
     } catch (error) {
       console.error(error)
     }
@@ -161,7 +180,7 @@ const AdminUsers = () => {
                   </MenuItem>
                   <Divider />
 
-                  <MenuItem>
+                  <MenuItem onClick={() => handleOpenChangePassword(user.uid)} >
                     <Box display={'flex'} alignItems={'center'} gap={'10px'}>
                       <Password color='primary' fontSize='small' />
                       <Typography variant='body2'>
@@ -251,6 +270,42 @@ const AdminUsers = () => {
 
             </CircularProgress>
           </Backdrop>
+        </Paper>
+      </Modal>
+
+      <Modal
+        onClose={() => setOpenChangePassowrd(false)}
+        open={openChangePassowrd}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <Paper
+          sx={{
+            width: '400px',
+            height: '140px',
+            display: 'flex',
+            alignItems: 'left',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            padding: '10px',
+
+          }}
+        >
+          <Typography width={'90%'} variant='body1' fontWeight={700}>Cambiar contraseña</Typography>
+          <form style={{
+            display: 'flex',
+            gap: '15px',
+            flexDirection: 'column',
+
+          }}
+            onSubmit={(e) => handleSendNewPassword(e)}
+          >
+            <TextField onChange={({ target }) => setNewPassword(target.value)} placeholder='Escriba nueva clave' variant='standard' type='password' required label={'Cambiar clave'}></TextField>
+            <Button type='submit' variant='contained' color='primary' >Cambiar clave</Button>
+          </form>
         </Paper>
       </Modal>
     </Box>
