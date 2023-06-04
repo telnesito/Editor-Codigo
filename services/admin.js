@@ -1,4 +1,4 @@
-const URL = 'http://localhost:8000/admin'
+const URL = 'https://codesue-db.onrender.com/admin'
 
 
 const ObtenerProyectosPorUID = async (data = {}) => {

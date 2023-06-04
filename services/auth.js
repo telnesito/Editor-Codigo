@@ -1,4 +1,4 @@
-const URL = 'http://localhost:8000/usuarios'
+const URL = 'https://codesue-db.onrender.com/usuarios'
 
 const iniciarSesion = async (data = {}) => {
   try {
