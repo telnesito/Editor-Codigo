@@ -1,6 +1,33 @@
 import { Box, Button, Modal, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { admin } from '../../../services/admin'
+import { useEffect, useState } from 'react'
+import { exportFile } from '../codeEditor/share/exportFile'
 
 const AdminProjects = ({ closeModal, isOpen, user }) => {
+
+  const [userProjects, setUserProjects] = useState([])
+
+  useEffect(() => {
+
+
+    const cargarProyectos = async () => {
+      try {
+        const response = await admin.ObtenerProyectosPorUID({
+          uid: user.uid
+        })
+        setUserProjects(response)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    cargarProyectos()
+
+  }, [user.uid])
+
+
+
+
 
   return (
     <Modal
@@ -39,23 +66,39 @@ const AdminProjects = ({ closeModal, isOpen, user }) => {
                 <TableCell>Accion</TableCell>
               </TableRow>
             </TableHead>
-
             <TableBody>
-              <TableRow>
-                <TableCell>Proyecto 1</TableCell>
-                <TableCell>Proyecto 1</TableCell>
+              {userProjects.length === 0 ?
+                <TableRow>
+                  <TableCell>No hay proyecto que mostrar</TableCell>
+                  <TableCell>n/a</TableCell>
 
-                <TableCell>Proyecto 1</TableCell>
-                <TableCell>Proyecto 1</TableCell>
-                <TableCell>
-                  <Box display={'flex'} gap={'10px'}>
-                    <Button variant='contained' color='success'>Descargar</Button>
-                    <Button variant='outlined' color='error'>Eliminar</Button>
+                  <TableCell>n/a</TableCell>
+                  <TableCell>n/a</TableCell>
+                  <TableCell>
+                    n/a
+                  </TableCell>
 
-                  </Box>
-                </TableCell>
+                </TableRow>
+                : userProjects.map(({ nombre, lenguaje, fecha, ultimoCambio, contenido }, index) =>
 
-              </TableRow>
+                  <TableRow key={index}>
+                    <TableCell>{nombre}</TableCell>
+                    <TableCell>{lenguaje}</TableCell>
+
+                    <TableCell>{fecha}</TableCell>
+                    <TableCell>{ultimoCambio}</TableCell>
+                    <TableCell>
+                      <Box display={'flex'} gap={'10px'}>
+
+                        <Button onClick={() => exportFile(nombre, contenido, "txt")} variant='contained' color='success'>Descargar</Button>
+                        <Button variant='outlined' color='error'>Eliminar</Button>
+
+                      </Box>
+                    </TableCell>
+
+                  </TableRow>
+                )
+              }
             </TableBody>
           </Table>
 
